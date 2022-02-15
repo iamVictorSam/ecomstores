@@ -1,13 +1,18 @@
+import 'package:ecomstore/controllers/categoriesController.dart';
+import 'package:ecomstore/controllers/userInforController.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../size_config.dart';
 import 'section_title.dart';
 
 class SpecialOffers extends StatelessWidget {
-  const SpecialOffers({
+  SpecialOffers({
     Key? key,
   }) : super(key: key);
 
+  final cateCtrl = Get.put(GetAllCategoriesController());
+  final userInfo = Get.put(GetUserInfoController());
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,23 +28,33 @@ class SpecialOffers extends StatelessWidget {
         SizedBox(height: getProportionateScreenWidth(20)),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              SpecialOfferCard(
-                image: "assets/images/Image Banner 2.png",
-                category: "Smartphone",
-                numOfBrands: 18,
-                press: () {},
-              ),
-              SpecialOfferCard(
-                image: "assets/images/Image Banner 3.png",
-                category: "Fashion",
-                numOfBrands: 24,
-                press: () {},
-              ),
-              SizedBox(width: getProportionateScreenWidth(20)),
-            ],
-          ),
+          child: Obx(() => Row(
+                children: [
+                  ...List.generate(
+                      cateCtrl.getAllcategories.length,
+                      (index) => SpecialOfferCard(
+                            category: cateCtrl.getAllcategories[index].name,
+                            numOfBrands: cateCtrl.getAllcategories[index].count,
+                            // image: cateCtrl.getAllcategories[index].image == ''
+                            //     ? FlutterLogo()
+                            //     : cateCtrl.getAllcategories[index].image,
+                            press: () {},
+                          )),
+                  // SpecialOfferCard(
+                  //   image: "assets/images/Image Banner 2.png",
+                  //   category: "Smartphone",
+                  //   numOfBrands: 18,
+                  //   press: () {},
+                  // ),
+                  // SpecialOfferCard(
+                  //   image: "assets/images/Image Banner 3.png",
+                  //   category: "Fashion",
+                  //   numOfBrands: 24,
+                  //   press: () {},
+                  // ),
+                  SizedBox(width: getProportionateScreenWidth(20)),
+                ],
+              )),
         ),
       ],
     );
@@ -50,12 +65,12 @@ class SpecialOfferCard extends StatelessWidget {
   const SpecialOfferCard({
     Key? key,
     required this.category,
-    required this.image,
+    // required this.image,
     required this.numOfBrands,
     required this.press,
   }) : super(key: key);
 
-  final String category, image;
+  final String category; /*image */
   final int numOfBrands;
   final GestureTapCallback press;
 
@@ -72,10 +87,15 @@ class SpecialOfferCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: Stack(
               children: [
-                Image.asset(
-                  image,
-                  fit: BoxFit.cover,
-                ),
+                // Image.network(
+                //   image,
+                //   fit: BoxFit.cover,
+                // ),
+                // Container(
+                //   height: 30,
+                //   width: 80,
+                //   color: Colors.purple,
+                // ),
                 Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(

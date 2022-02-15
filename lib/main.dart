@@ -1,11 +1,19 @@
+import 'package:ecomstore/screens/verification.dart';
 import 'package:flutter/material.dart';
 import 'package:ecomstore/routes.dart';
 import 'package:ecomstore/screens/profile/profile_screen.dart';
 import 'package:ecomstore/screens/splash/splash_screen.dart';
 import 'package:ecomstore/theme.dart';
+import 'package:flutter_paystack_client/flutter_paystack_client.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await PaystackClient.initialize(
+      'pk_live_3c7b2be1f48b19309aac1e7791e036f7511d139a');
   runApp(MyApp());
 }
 
@@ -19,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: theme(),
       // home: SplashScreen(),
       // We use routeName so that we dont need to remember the name
-      initialRoute: SplashScreen.routeName,
+      initialRoute: VerificationScreen.routeName,
       routes: routes,
     );
   }

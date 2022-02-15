@@ -32,10 +32,11 @@ class Body extends StatelessWidget {
                 pressOnSeeMore: () {},
               ),
               TopRoundedContainer(
-                color: Color(0xFFF6F7F9),
+                // color: Color(0xFFF6F7F9),
+                color: Colors.transparent,
                 child: Column(
                   children: [
-                    ColorDots(product: product),
+                    // ColorDots(product: product),
                     TopRoundedContainer(
                       color: Colors.white,
                       child: Padding(

@@ -1,3 +1,4 @@
+import 'package:ecomstore/screens/verification.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ecomstore/screens/cart/cart_screen.dart';
 import 'package:ecomstore/screens/complete_profile/complete_profile_screen.dart';
@@ -16,6 +17,7 @@ import 'screens/sign_up/sign_up_screen.dart';
 // All our routes will be available here
 final Map<String, WidgetBuilder> routes = {
   SplashScreen.routeName: (context) => SplashScreen(),
+  VerificationScreen.routeName: (context) => VerificationScreen(),
   SignInScreen.routeName: (context) => SignInScreen(),
   ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
   LoginSuccessScreen.routeName: (context) => LoginSuccessScreen(),

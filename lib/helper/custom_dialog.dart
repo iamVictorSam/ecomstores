@@ -89,18 +89,17 @@ class DialogHelper {
     //   );
     // }
 
-    // Get.dialog(
-    //   WillPopScope(
-    //     child: Center(
-    //       child:CircularProgressIndicator(),
-
-    //     ),
-    //     onWillPop: () => Future.value(false),
-    //   ),
-    //   barrierDismissible: false,
-    //   barrierColor: Color(0xff141A31).withOpacity(.3),
-    //   useSafeArea: true,
-    // );
+    Get.dialog(
+      WillPopScope(
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
+        onWillPop: () => Future.value(false),
+      ),
+      barrierDismissible: false,
+      barrierColor: Color(0xff141A31).withOpacity(.3),
+      useSafeArea: true,
+    );
   }
 
   static void showSuccess([String? message]) {
@@ -123,5 +122,6 @@ class DialogHelper {
 
   static void hideDialog() {
     Get.back();
+    // Navigator.pop(context);
   }
 }

@@ -17,11 +17,12 @@ class SignUpController with BaseController {
       "password": password,
       "username": username,
     };
-    // showLoading('Loading');
+    showLoading('Loading');
     print(request);
     try {
-      await BaseClient().postSignUp('/api/v1/auth/users', request);
-      // .catchError(handleError);
+      await BaseClient()
+          .postSignUp('/api/v1/auth/users', request)
+          .catchError(handleError);
       Get.offAll(() => SignInScreen());
     } catch (e) {
       print(e);

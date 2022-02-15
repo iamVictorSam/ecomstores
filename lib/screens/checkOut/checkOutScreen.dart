@@ -247,9 +247,10 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
                 //    charge: charge,
                 //  );
 
+                var realAmount = _amount * 1000;
                 final charge = Charge()
                   ..email = _email
-                  ..amount = _amount
+                  ..amount = realAmount
                   ..reference = 'ref_${DateTime.now().millisecondsSinceEpoch}';
                 final res =
                     await PaystackClient.checkout(context, charge: charge);

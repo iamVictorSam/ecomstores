@@ -1,5 +1,9 @@
 import 'package:ecomstore/controllers/cartController.dart';
+import 'package:ecomstore/data_layer/orders.dart';
+import 'package:ecomstore/screens/checkOut/checkOutScreen.dart';
+import 'package:ecomstore/screens/sign_up/sign_up_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_paystack_client/flutter_paystack_client.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -10,6 +14,18 @@ import '../../../size_config.dart';
 
 class CheckoutCard extends StatelessWidget {
   final cartController = Get.put(CartController());
+  final createOrder = OrdersControlller();
+  String _email = 'iamvictorsam@gmail.com';
+  int _amount = 0;
+  String _message = '';
+
+  var publicKey = 'pk_live_3c7b2be1f48b19309aac1e7791e036f7511d139a';
+
+  @override
+  void initState() {
+    PaystackClient.initialize(publicKey);
+  }
+
   CheckoutCard({
     Key? key,
   }) : super(key: key);
@@ -81,40 +97,109 @@ class CheckoutCard extends StatelessWidget {
                     )),
                 Obx(() {
                   return SizedBox(
-                      width: getProportionateScreenWidth(190),
-                      child: cartController.cartItems.length == 0
-                          ? Container(
-                              child: SizedBox(
-                              width: double.infinity,
-                              height: getProportionateScreenHeight(56),
-                              child: FlatButton(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                                color: kTextColor,
-                                onPressed: () {},
-                                child: Text(
-                                  'Check Out',
-                                  style: TextStyle(
-                                    fontSize: getProportionateScreenWidth(18),
-                                    color: Colors.white,
-                                  ),
+                    width: getProportionateScreenWidth(190),
+                    child: cartController.cartItems.length == 0
+                        ? Container(
+                            child: SizedBox(
+                            width: double.infinity,
+                            height: getProportionateScreenHeight(56),
+                            child: FlatButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              color: kTextColor,
+                              onPressed: () {},
+                              child: Text(
+                                'Check Out',
+                                style: TextStyle(
+                                  fontSize: getProportionateScreenWidth(18),
+                                  color: Colors.white,
                                 ),
                               ),
-                            ))
-                          : DefaultButton(text: "Check Out", press: () {})
-                      // : DefaultButton(
-                      //     text: "Check Out",
-                      //     press: () {
-                      //       final box = GetStorage();
-                      //       if(box.read('email') == null || isBlank){
-                      //         Get.to(() => SignUpScreen());
-                      //       }else{
-                      //          Get.to(() => LocationFormScreen());
-                      //       }
+                            ),
+                          ))
+                        // : DefaultButton(text: "Check Out", press: () {})
+                        : DefaultButton(
+                            text: "Check Out",
+                            press: () {
+                              Get.dialog(Dialog(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 20.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        'Choose payment method',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 50,
+                                      ),
+                                      Row(
+                                        children: [
+                                          // DefaultButton(
+                                          //   press: () {},
+                                          //   text: 'Pay on Delivery',
+                                          // ),
+                                          Expanded(
+                                            child: TextButton(
+                                                onPressed: () {
+                                                  createOrder
+                                                      .createOrder(context);
+                                                },
+                                                child: Text('Pay on Delivery')),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Expanded(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 20.0),
+                                              child: ElevatedButton(
+                                                  onPressed: () async {
+                                                    createOrder
+                                                        .createOrder(context);
 
-                      //     },
-                      //   ),
-                      );
+                                                    // final charge = Charge()
+                                                    //   ..email = _email
+                                                    //   ..amount = _amount
+                                                    //   ..reference =
+                                                    //       'ref_${DateTime.now().millisecondsSinceEpoch}';
+                                                    // final res =
+                                                    //     await PaystackClient
+                                                    //         .checkout(context,
+                                                    //             charge: charge);
+
+                                                    // if (res.status) {
+                                                    //   _message =
+                                                    //       'Charge was successful. Ref: ${res.reference}';
+                                                    // } else {
+                                                    //   _message =
+                                                    //       'Failed: ${res.message}';
+                                                    // }
+                                                  },
+                                                  child: Text('Pay with Card')),
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ));
+                              // final box = GetStorage();
+                              // if (box.read('username').isBlank) {
+                              //   Get.to(() => SignUpScreen());
+                              // } else {
+                              //   Get.to(() => LocationFormScreen());
+                              // }
+                            },
+                          ),
+                  );
                 }),
               ],
             ),

@@ -55,9 +55,9 @@ class BaseController {
             Get.offAll(SignInScreen());
           });
     } else if (error is PageNotFoundException) {
-      var message = 'Manifest not found, please try again';
+      var message = 'Please try again';
       DialogHelper.showErrorDialog(
-          title: 'Invalid ManifestCode',
+          title: 'Error',
           desc: message,
           press: () {
             if (Get.isDialogOpen!) Get.back();
@@ -72,6 +72,6 @@ class BaseController {
   }
 
   hideLoading() {
-    DialogHelper.hideDialog();
+    DialogHelper?.hideDialog();
   }
 }

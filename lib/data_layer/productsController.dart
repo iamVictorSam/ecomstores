@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ecomstore/data_layer/models/all_categories.dart';
 import 'package:ecomstore/data_layer/models/all_products.dart';
 import 'package:ecomstore/helper/baseController.dart';
 import 'package:ecomstore/services/base_client.dart';
@@ -30,14 +31,14 @@ class ProductsController with BaseController {
 
 // Get
   Future getAllProducts() async {
-    showLoading('Fetching data...');
+    // showLoading('Fetching data...');
     var response = await BaseClient()
         .get(
           '/api/v1/wp/products',
         )
         .catchError(handleError);
     if (response == null) return;
-    hideLoading();
+    // hideLoading();
 
     final result = jsonDecode(response) as Map;
 
@@ -46,17 +47,21 @@ class ProductsController with BaseController {
     return allProductsFromJson(datu);
   }
 
-  Future getTrip(String manifest) async {
-    showLoading('Posting data...');
+  Future getAllCategories() async {
+    // showLoading('Fetching data...');
     var response = await BaseClient()
         .get(
-          '/api/v1/trips/getTrip?trip_code=$manifest',
+          '/api/v1/wp/products/main/categories',
         )
         .catchError(handleError);
     if (response == null) return;
-    hideLoading();
-    var result = jsonDecode(response);
+    // hideLoading();
 
-    print(result);
+    final result = jsonDecode(response) as Map;
+
+    final data = result['categories'] as List;
+    print(data);
+    final datu = jsonEncode(data);
+    return categoriesFromJson(datu);
   }
 }

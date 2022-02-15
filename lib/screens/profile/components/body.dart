@@ -1,4 +1,8 @@
+import 'package:ecomstore/screens/orders/orders.dart';
+import 'package:ecomstore/screens/sign_in/sign_in_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'profile_menu.dart';
 import 'profile_pic.dart';
@@ -13,9 +17,9 @@ class Body extends StatelessWidget {
           ProfilePic(),
           SizedBox(height: 20),
           ProfileMenu(
-            text: "My Account",
+            text: "Orders",
             icon: "assets/icons/User Icon.svg",
-            press: () => {},
+            press: () => Get.to(() => Orders()),
           ),
           ProfileMenu(
             text: "Notifications",
@@ -35,7 +39,11 @@ class Body extends StatelessWidget {
           ProfileMenu(
             text: "Log Out",
             icon: "assets/icons/Log out.svg",
-            press: () {},
+            press: () {
+              GetStorage()
+                  .remove('username')
+                  .whenComplete(() => Get.offAll(SignInScreen()));
+            },
           ),
         ],
       ),

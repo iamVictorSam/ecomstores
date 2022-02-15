@@ -20,6 +20,7 @@ class LoginController with BaseController {
     hideLoading();
     var result = jsonDecode(response);
     var token = result['data']['jwt'];
+    GetStorage().write('username', username);
     GetStorage()
         .write('token', token)
         .whenComplete(() => Get.offAll(() => HomeScreen()));
