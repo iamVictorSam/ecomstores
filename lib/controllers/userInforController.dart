@@ -21,7 +21,7 @@ class GetUserInfoController extends GetxController {
       if (getUserInfoResult != null) {
         getUserInfo.add(
             getUserInfoResult); // events.assignAll(eventResult) as List<Welcome>;
-        print('******8888888888888 $getUserInfo');
+        // print('******8888888888888 $getUserInfo');
       }
     } finally {
       isLoading(false);

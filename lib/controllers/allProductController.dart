@@ -19,7 +19,7 @@ class GetAllProductsController extends GetxController {
       if (getAllProductResult != null) {
         getAllProducts.value =
             getAllProductResult; // events.assignAll(eventResult) as List<Welcome>;
-        print(getAllProducts);
+        // print(getAllProducts);
       }
     } finally {
       isLoading(false);

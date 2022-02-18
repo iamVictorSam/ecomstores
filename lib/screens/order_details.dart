@@ -601,17 +601,17 @@ class LineItemes extends StatelessWidget {
           child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            height: getProportionateScreenHeight(80),
-            width: getProportionateScreenWidth(80),
-            decoration: BoxDecoration(
-              // color: kPrimaryColor,
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
-            ),
-            child: Image.network(image),
-          ),
+          // Container(
+          //   height: getProportionateScreenHeight(80),
+          //   width: getProportionateScreenWidth(80),
+          //   decoration: BoxDecoration(
+          //     // color: kPrimaryColor,
+          //     borderRadius: BorderRadius.all(
+          //       Radius.circular(8),
+          //     ),
+          //   ),
+          //   child: Image.network(image),
+          // ),
           Column(children: [
             Expanded(
                 child: Container(

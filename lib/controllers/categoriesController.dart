@@ -20,7 +20,7 @@ class GetAllCategoriesController extends GetxController {
       if (getAllCategoriesResult != null) {
         getAllcategories.value =
             getAllCategoriesResult; // events.assignAll(eventResult) as List<Welcome>;
-        print(getAllcategories);
+        // print(getAllcategories);
       }
     } finally {
       isLoading(false);

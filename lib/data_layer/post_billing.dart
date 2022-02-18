@@ -64,51 +64,82 @@ postOrder({
   print('id $id');
   print('$email email');
   final uri = Uri.parse(
-      'https://wp-rest-service.herokuapp.com/api/v1/user/users/customer/$id');
+      'https://wp-rest-service.herokuapp.com/api/v1/user/users/customer/347');
+  // var requestBody = {
+  //   "billing": {
+  //     "first_name": "$fname",
+  //     "last_name": "$lname",
+  //     "company": "$company",
+  //     "address_1": "$address1",
+  //     "address_2": "$address2",
+  //     "city": "$city",
+  //     "state": "$state",
+  //     "postcode": "$postCode",
+  //     "country": "$country",
+  //     "email": "$email",
+  //     "phone": "$phoneNo"
+  //   },
+  //   "shipping": {
+  //     "first_name": "$fnameS",
+  //     "last_name": "$lnameS",
+  //     "company": "$companyS",
+  //     "address_1": "$address1S",
+  //     "address_2": "$address2S",
+  //     "city": "$cityS",
+  //     "postcode": "$postCodeS",
+  //     "country": "$countryS",
+  //     "state": "$stateS",
+  //   },
+  // };
   var requestBody = {
     "billing": {
-      "first_name": "$fname",
-      "last_name": "$lname",
-      "company": "$company",
-      "address_1": "$address1",
-      "address_2": "$address2",
-      "city": "$city",
-      "state": "$state",
-      "postcode": "$postCode",
-      "country": "$country",
-      "email": "$email",
-      "phone": "$phoneNo"
+      "first_name": "Nath",
+      "last_name": "John",
+      "company": "Abrack",
+      "address_1": "Us",
+      "address_2": "UK",
+      "city": "Nevada",
+      "postcode": "533112",
+      "country": "USA",
+      "state": "Alabama",
+      "email": "deelesisuanu@gmail.com",
+      "phone": "+2349031382488"
     },
     "shipping": {
-      "first_name": "$fnameS",
-      "last_name": "$lnameS",
-      "company": "$companyS",
-      "address_1": "$address1S",
-      "address_2": "$address2S",
-      "city": "$cityS",
-      "state": "$stateS",
-      "postcode": "$postCodeS",
-      "country": "$countryS"
-    },
+      "first_name": "Nath",
+      "last_name": "John",
+      "company": "Abrack",
+      "address_1": "Us",
+      "address_2": "UK",
+      "city": "Nevada",
+      "postcode": "533112",
+      "country": "USA",
+      "state": "Alabama"
+    }
   };
   print(requestBody);
+  Get.back();
 
-  http.Response response = await http.put(
-    uri,
-    body: json.encode(requestBody),
-  );
-  // var jsonString = response.body;
+  try {
+    http.Response response = await http.put(
+      uri,
+      body: jsonEncode(requestBody),
+    );
+    // var jsonString = response.body;
+    if (response == null) return;
+    var result = jsonDecode(response.body);
 
-  if (response.statusCode == 201) {
-    // processPayment();
-    Get.to(() => ChoosePaymentScreen());
-  } else if (response.statusCode == 200) {
-    // processPayment();
-    Get.to(() => ChoosePaymentScreen());
+    if (result['status'] == 'success') {
+      // processPayment();
+      Get.to(() => ChoosePaymentScreen());
+    }
+    // Get.to(() => ChoosePaymentScreen());
+    var jsonString = response.body;
+    print(jsonDecode(jsonString));
+  } catch (e) {
+    print(e);
   }
 
-  var jsonString = response.body;
-  print(jsonDecode(jsonString));
   // var arrayOrder = createOrderFromJson(jsonString);
   // String orderId = arrayOrder.data.orderId;
 

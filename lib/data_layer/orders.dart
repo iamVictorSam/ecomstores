@@ -52,7 +52,7 @@ class OrdersControlller with BaseController {
     print(items);
     var request = {
       "payment_method_id": 'paystack',
-      "payment_method": "Cash on delivery",
+      "payment_method": "Pay With Debit/Credit Cards",
       "items": items,
       "shipping_methods": [
         {
@@ -135,7 +135,7 @@ class OrdersControlller with BaseController {
     print(id);
     var response = await BaseClient()
         .get(
-          '/api/v1/order/users/orders/$id',
+          '/api/v1/order/users/orders/347',
         )
         .catchError(handleError);
     if (response == null) return;
