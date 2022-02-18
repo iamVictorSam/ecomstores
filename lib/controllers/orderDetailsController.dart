@@ -21,7 +21,7 @@ class GetOrderDetailsController extends GetxController {
       if (getOrderDetailsResult != null) {
         getOrders.value =
             getOrderDetailsResult; // events.assignAll(eventResult) as List<Welcome>;
-        print(getOrders);
+        // print(getOrders);
       }
     } finally {
       isLoading(false);

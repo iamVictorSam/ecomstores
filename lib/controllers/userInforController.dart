@@ -19,8 +19,8 @@ class GetUserInfoController extends GetxController {
     try {
       var getUserInfoResult = await UserController().getUserInfo();
       if (getUserInfoResult != null) {
-        getUserInfo.value =
-            getUserInfoResult; // events.assignAll(eventResult) as List<Welcome>;
+        getUserInfo.add(
+            getUserInfoResult); // events.assignAll(eventResult) as List<Welcome>;
         print('******8888888888888 $getUserInfo');
       }
     } finally {

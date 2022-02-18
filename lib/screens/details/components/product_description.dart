@@ -1,13 +1,16 @@
 import 'package:ecomstore/data_layer/models/all_products.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ecomstore/models/Product.dart';
+import 'package:get/state_manager.dart';
+// import 'package:flutter_html.dart'
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
 class ProductDescription extends StatelessWidget {
-  const ProductDescription({
+  ProductDescription({
     Key? key,
     required this.product,
     this.pressOnSeeMore,
@@ -15,6 +18,7 @@ class ProductDescription extends StatelessWidget {
 
   final AllProducts product;
   final GestureTapCallback? pressOnSeeMore;
+  static RxBool isOpen = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -50,16 +54,34 @@ class ProductDescription extends StatelessWidget {
         //     ),
         //   ),
         // ),
+        // Padding(
+        //   padding: EdgeInsets.only(
+        //     left: getProportionateScreenWidth(20),
+        //     right: getProportionateScreenWidth(64),
+        //   ),
+        //   child: Text(
+        //     product.description,
+        //     maxLines: 3,
+        //   ),
+        // ),
         Padding(
           padding: EdgeInsets.only(
             left: getProportionateScreenWidth(20),
             right: getProportionateScreenWidth(64),
           ),
-          child: Text(
-            product.description,
-            maxLines: 3,
-          ),
+          child: Html(data: """${product.shortDescription}"""),
+          // maxLines: 3,
         ),
+        isOpen.value
+            ? Padding(
+                padding: EdgeInsets.only(
+                  left: getProportionateScreenWidth(20),
+                  right: getProportionateScreenWidth(64),
+                ),
+                child: Html(data: """${product.description}"""),
+                // maxLines: 3,
+              )
+            : Container(),
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: getProportionateScreenWidth(20),
@@ -69,10 +91,26 @@ class ProductDescription extends StatelessWidget {
             onTap: () {},
             child: Row(
               children: [
-                Text(
-                  "See More Detail",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600, color: kPrimaryColor),
+                GestureDetector(
+                  onTap: () => {
+                    if (isOpen.isFalse)
+                      {isOpen(true)}
+                    else if (isOpen.isTrue)
+                      {isOpen(false)}
+                  },
+                  child: Obx(() => isOpen.value
+                      ? Text(
+                          "See less Details",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: kPrimaryColor),
+                        )
+                      : Text(
+                          "See more Details",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: kPrimaryColor),
+                        )),
                 ),
                 SizedBox(width: 5),
                 Icon(

@@ -1,6 +1,9 @@
 import 'package:ecomstore/controllers/cartController.dart';
+import 'package:ecomstore/controllers/userInforController.dart';
+import 'package:ecomstore/data_layer/models/user_info.dart';
 import 'package:ecomstore/data_layer/orders.dart';
 import 'package:ecomstore/screens/checkOut/checkOutScreen.dart';
+import 'package:ecomstore/screens/choose_payment/choosePayment.dart';
 import 'package:ecomstore/screens/sign_up/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paystack_client/flutter_paystack_client.dart';
@@ -15,6 +18,7 @@ import '../../../size_config.dart';
 class CheckoutCard extends StatelessWidget {
   final cartController = Get.put(CartController());
   final createOrder = OrdersControlller();
+  final userInfo = Get.put(GetUserInfoController());
   String _email = 'iamvictorsam@gmail.com';
   int _amount = 0;
   String _message = '';
@@ -121,77 +125,86 @@ class CheckoutCard extends StatelessWidget {
                         : DefaultButton(
                             text: "Check Out",
                             press: () {
-                              Get.dialog(Dialog(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 20.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        'Choose payment method',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 50,
-                                      ),
-                                      Row(
-                                        children: [
-                                          // DefaultButton(
-                                          //   press: () {},
-                                          //   text: 'Pay on Delivery',
-                                          // ),
-                                          Expanded(
-                                            child: TextButton(
-                                                onPressed: () {
-                                                  createOrder
-                                                      .createOrder(context);
-                                                },
-                                                child: Text('Pay on Delivery')),
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Expanded(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 20.0),
-                                              child: ElevatedButton(
-                                                  onPressed: () async {
-                                                    createOrder
-                                                        .createOrder(context);
+                              GetStorage().write(
+                                  'email', userInfo.getUserInfo[0].data.email);
 
-                                                    // final charge = Charge()
-                                                    //   ..email = _email
-                                                    //   ..amount = _amount
-                                                    //   ..reference =
-                                                    //       'ref_${DateTime.now().millisecondsSinceEpoch}';
-                                                    // final res =
-                                                    //     await PaystackClient
-                                                    //         .checkout(context,
-                                                    //             charge: charge);
+                              print(GetStorage().read('email'));
 
-                                                    // if (res.status) {
-                                                    //   _message =
-                                                    //       'Charge was successful. Ref: ${res.reference}';
-                                                    // } else {
-                                                    //   _message =
-                                                    //       'Failed: ${res.message}';
-                                                    // }
-                                                  },
-                                                  child: Text('Pay with Card')),
-                                            ),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ));
-                              // final box = GetStorage();
+                              userInfo.getUserInfo[0].data.billing.address1 ==
+                                      ''
+                                  ? Get.to(LocationFormScreen())
+                                  : Get.to(ChoosePaymentScreen());
+                              //         vertical: 20.0),
+                              //     child: Column(
+                              //       mainAxisSize: MainAxisSize.min,
+                              //       children: [
+                              //         Text(
+                              //           'Choose payment method',
+                              //           style: TextStyle(
+                              //             fontWeight: FontWeight.bold,
+                              //             fontSize: 20,
+                              //           ),
+                              //         ),
+                              //         SizedBox(
+                              //           height: 50,
+                              //         ),
+                              //         Row(
+                              //           children: [
+                              //             // DefaultButton(
+                              //             //   press: () {},
+                              //             //   text: 'Pay on Delivery',
+                              //             // ),
+                              //             Expanded(
+                              //               child: TextButton(
+                              //                   onPressed: () {
+                              //                     createOrder
+                              //                         .createOrder(context);
+                              //                   },
+                              //                   child: Text('Pay on Delivery')),
+                              //             ),
+                              //             SizedBox(
+                              //               width: 5,
+                              //             ),
+                              //             Expanded(
+                              //               child: Padding(
+                              //                 padding: const EdgeInsets.only(
+                              //                     right: 20.0),
+                              //                 child: ElevatedButton(
+                              //                     onPressed: () async {
+                              //                       // createOrder
+                              //                       //     .createOrder(context);
+                              //                       print(
+                              //                           '1234567890-09876543234567890  ${userInfo.getUserInfo[0].data.billing.address1}');
+                              //                       // print();
+
+                              //                       // final charge = Charge()
+                              //                       //   ..email = _email
+                              //                       //   ..amount = _amount
+                              //                       //   ..reference =
+                              //                       //       'ref_${DateTime.now().millisecondsSinceEpoch}';
+                              //                       // final res =
+                              //                       //     await PaystackClient
+                              //                       //         .checkout(context,
+                              //                       //             charge: charge);
+
+                              //                       // if (res.status) {
+                              //                       //   _message =
+                              //                       //       'Charge was successful. Ref: ${res.reference}';
+                              //                       // } else {
+                              //                       //   _message =
+                              //                       //       'Failed: ${res.message}';
+                              //                       // }
+                              //                     },
+                              //                     child: Text('Pay with Card')),
+                              //               ),
+                              //             )
+                              //           ],
+                              //         )
+                              //       ],
+                              //     ),
+                              //   ),
+                              // ));
+                              // // final box = GetStorage();
                               // if (box.read('username').isBlank) {
                               //   Get.to(() => SignUpScreen());
                               // } else {

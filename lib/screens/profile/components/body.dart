@@ -1,3 +1,6 @@
+import 'package:ecomstore/controllers/cartController.dart';
+import 'package:ecomstore/controllers/orderDetailsController.dart';
+import 'package:ecomstore/data_layer/userInfo.dart';
 import 'package:ecomstore/screens/orders/orders.dart';
 import 'package:ecomstore/screens/sign_in/sign_in_screen.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +11,9 @@ import 'profile_menu.dart';
 import 'profile_pic.dart';
 
 class Body extends StatelessWidget {
+  final cartController = Get.put(CartController());
+  final userController = Get.put(UserController());
+  final orders = Get.put(GetOrderDetailsController());
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

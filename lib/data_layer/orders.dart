@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:ecomstore/controllers/cartController.dart';
 import 'package:ecomstore/data_layer/models/order_details.dart';
 import 'package:ecomstore/helper/baseController.dart';
+import 'package:ecomstore/screens/checkOut/components/Purchased.dart';
+import 'package:ecomstore/screens/home/home_screen.dart';
 import 'package:ecomstore/services/base_client.dart';
 import 'package:flutter_paystack_client/flutter_paystack_client.dart';
 import 'package:get/get.dart';
@@ -25,12 +27,61 @@ import 'package:get_storage/get_storage.dart';
 
 class OrdersControlller with BaseController {
   final cartController = Get.put(CartController());
+  var id = GetStorage().read('userId');
   String _email = 'iamvictorsam@gmail.com';
   String _message = ' Purchase payment from email';
 
   // var publicKey = 'pk_test_4f1cebce3dba743b1414645a1f5ade8528d74138';
 
-  void createOrder(context) async {
+  void createOrderPayStack(context) async {
+    populate() {
+      var checkout = [];
+      for (var i = 0; i < cartController.cartCount; i++) {
+        String id = cartController.cartItems[i].productId.toString();
+        int quantity = 1;
+        dynamic details = {"product_id": id, "quantity": quantity};
+        // checkout.add(details);
+        checkout.add(details);
+      }
+      return checkout;
+    }
+
+//
+    var items = populate();
+    // var item = ...items;
+    print(items);
+    var request = {
+      "payment_method_id": 'paystack',
+      "payment_method": "Cash on delivery",
+      "items": items,
+      "shipping_methods": [
+        {
+          "method_id": "flat_rate",
+          "method_title": "Flat Rate",
+          "total": cartController.totalPrice.toString()
+        }
+      ],
+      "hasPaid": false
+    };
+    showLoading('Posting data...');
+    var response = await BaseClient()
+        .post('/api/v1/order/users/orders/$id', request)
+        .catchError(handleError);
+    if (response == null) return;
+    hideLoading();
+    cartController.cartItems.clear();
+
+    Get.offAll(Purchased());
+
+    var result = jsonDecode(response);
+    if (result['status'] == 'success') {}
+    print(result);
+    // GetStorage()
+    //     .write('token', token)
+    //     .whenComplete(() => Get.offAll(() => HomeScreen()));
+  }
+
+  void createOrderCod(context) async {
     int _amount = cartController.totalPrice.toInt();
     populate() {
       var checkout = [];
@@ -49,7 +100,7 @@ class OrdersControlller with BaseController {
     // var item = ...items;
     print(items);
     var request = {
-      "payment_method_id": "cod",
+      "payment_method_id": 'cod',
       "payment_method": "Cash on delivery",
       "items": items,
       "shipping_methods": [
@@ -63,24 +114,15 @@ class OrdersControlller with BaseController {
     };
     showLoading('Posting data...');
     var response = await BaseClient()
-        .post('/api/v1/order/users/orders/330', request)
+        .post('/api/v1/order/users/orders/$id', request)
         .catchError(handleError);
     if (response == null) return;
     hideLoading();
-    var result = jsonDecode(response);
-    if (result['status'] == 'success') {
-      final charge = Charge()
-        ..email = _email
-        ..amount = _amount
-        ..reference = 'ref_${DateTime.now().millisecondsSinceEpoch}';
-      final res = await PaystackClient.checkout(context, charge: charge);
 
-      if (res.status) {
-        _message = 'Charge was successful. Ref: ${res.reference}';
-      } else {
-        _message = 'Failed: ${res.message}';
-      }
-    }
+    cartController.cartItems.clear();
+    Get.offAll(Purchased());
+    var result = jsonDecode(response);
+    if (result['status'] == 'success') {}
     print(result);
     // GetStorage()
     //     .write('token', token)

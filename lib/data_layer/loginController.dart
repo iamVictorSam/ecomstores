@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:ecomstore/helper/baseController.dart';
 import 'package:ecomstore/screens/home/home_screen.dart';
 import 'package:get/get.dart';
@@ -12,15 +11,27 @@ class LoginController with BaseController {
       "username": username,
       "password": password,
     };
+
     showLoading('Posting data...');
+
     var response = await BaseClient()
         .postSignUp('/api/v1/auth/users/login', request)
         .catchError(handleError);
     if (response == null) return;
+
     hideLoading();
+
     var result = jsonDecode(response);
+
     var token = result['data']['jwt'];
+    var id = result['data']['user']['id'];
+
+    print('id $id');
+
+    GetStorage().write('userId', id);
+
     GetStorage().write('username', username);
+
     GetStorage()
         .write('token', token)
         .whenComplete(() => Get.offAll(() => HomeScreen()));

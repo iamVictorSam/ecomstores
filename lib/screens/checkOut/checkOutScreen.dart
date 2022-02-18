@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:ecomstore/controllers/cartController.dart';
 import 'package:ecomstore/data_layer/post_billing.dart';
+import 'package:ecomstore/screens/choose_payment/choosePayment.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
@@ -25,6 +26,7 @@ class LocationFormScreen extends StatefulWidget {
 class _LocationFormScreenState extends State<LocationFormScreen> {
   TextEditingController fname = TextEditingController();
   TextEditingController lname = TextEditingController();
+  TextEditingController company = TextEditingController();
   TextEditingController city = TextEditingController();
   TextEditingController state = TextEditingController();
   TextEditingController postCode = TextEditingController();
@@ -214,10 +216,11 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
                   isloading = !isloading;
                 }
               });
+              print(company.text);
               postOrder(
                 fname: fname.text,
                 lname: lname.text,
-                // email: email.text,
+                company: company.text,
                 city: city.text,
                 country: country.text,
                 state: state.text,
@@ -227,6 +230,7 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
                 address2: address2.text,
                 fnameS: fname.text,
                 lnameS: lname.text,
+                companyS: company.text,
                 cityS: city.text,
                 countryS: country.text,
                 stateS: state.text,
@@ -247,20 +251,21 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
                 //    charge: charge,
                 //  );
 
-                var realAmount = _amount * 1000;
-                final charge = Charge()
-                  ..email = _email
-                  ..amount = realAmount
-                  ..reference = 'ref_${DateTime.now().millisecondsSinceEpoch}';
-                final res =
-                    await PaystackClient.checkout(context, charge: charge);
+                // var realAmount = _amount * 1000;
+                // print(realAmount);
+                // final charge = Charge()
+                //   ..email = _email
+                //   ..amount = realAmount
+                //   ..reference = 'ref_${DateTime.now().millisecondsSinceEpoch}';
+                // final res =
+                //     await PaystackClient.checkout(context, charge: charge);
 
-                if (res.status) {
-                  _message = 'Charge was successful. Ref: ${res.reference}';
-                } else {
-                  _message = 'Failed: ${res.message}';
-                }
-                setState(() {});
+                // if (res.status) {
+                //   _message = 'Charge was successful. Ref: ${res.reference}';
+                // } else {
+                //   _message = 'Failed: ${res.message}';
+                // }
+                // setState(() {});
 
                 setState(() {
                   if (isloading == true) {
@@ -268,7 +273,7 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
                   }
                 });
               });
-              Navigator.pop(context);
+              // Navigator.pop(context);
             } catch (e) {
               showError(e.toString());
             }
@@ -284,18 +289,19 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
           ),
           onPressed: () {
             Navigator.pop(context);
-            // Get.to(() => ShippingScreen(
-            //       bAddress1: address1.text,
-            //       bAddress2: address2.text,
-            //       bCity: city.text,
-            //       bCountry: country.text,
-            //       bEmail: email.text,
-            //       bFname: fname.text,
-            //       bLname: lname.text,
-            //       bPhoneNo: phone.text,
-            //       bPostCode: postCode.text,
-            //       bState: state.text,
-            //     ));
+            Get.to(() => ShippingScreen(
+                  bAddress1: address1.text,
+                  bAddress2: address2.text,
+                  bCompany: company.text,
+                  bCity: city.text,
+                  bCountry: country.text,
+                  bEmail: email.text,
+                  bFname: fname.text,
+                  bLname: lname.text,
+                  bPhoneNo: phone.text,
+                  bPostCode: postCode.text,
+                  bState: state.text,
+                ));
           },
         )
       ],
@@ -432,6 +438,23 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
                                       FloatingLabelBehavior.auto,
                                   contentPadding: EdgeInsets.symmetric(
                                       horizontal: 8, vertical: 8),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              TextFormField(
+                                controller: company,
+                                decoration: InputDecoration(
+                                  labelText: "Compan",
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 8),
+                                  // hintText: "Re-enter your password",
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.auto,
+                                  // disabledBorder: UnderlineInputBorder(),
+
+                                  // suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
                                 ),
                               ),
                               SizedBox(
