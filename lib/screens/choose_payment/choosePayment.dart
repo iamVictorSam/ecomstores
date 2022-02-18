@@ -44,7 +44,7 @@ class ChoosePaymentScreen extends StatelessWidget {
 
                 final charge = Charge()
                   ..email = _email
-                  ..amount = _amount * 100
+                  ..amount = _amount * 10
                   ..reference = 'ref_${DateTime.now().millisecondsSinceEpoch}';
                 final res =
                     await PaystackClient.checkout(context, charge: charge);

@@ -114,7 +114,7 @@ class OrdersControlller with BaseController {
     };
     showLoading('Posting data...');
     var response = await BaseClient()
-        .post('/api/v1/order/users/orders/$id', request)
+        .post('/api/v1/order/users/orders/347', request)
         .catchError(handleError);
     if (response == null) return;
     hideLoading();

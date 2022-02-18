@@ -216,63 +216,37 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
                   isloading = !isloading;
                 }
               });
+              Get.to(ChoosePaymentScreen());
               print(company.text);
-              postOrder(
-                fname: fname.text,
-                lname: lname.text,
-                company: company.text,
-                city: city.text,
-                country: country.text,
-                state: state.text,
-                phoneNo: phone.text,
-                postCode: postCode.text,
-                address1: address1.text,
-                address2: address2.text,
-                fnameS: fname.text,
-                lnameS: lname.text,
-                companyS: company.text,
-                cityS: city.text,
-                countryS: country.text,
-                stateS: state.text,
-                address1S: address1.text,
-                address2S: address2.text,
-                postCodeS: postCode.text,
-              ).whenComplete(() async {
-                // Get.to(() => CheckoutMethodSelectable());
-                // _processPayment();
-                //              Charge charge = Charge()
-                //    ..amount = 10000
-                //    ..reference = _getReference()
-                //     // or ..accessCode = _getAccessCodeFrmInitialization()
-                //    ..email = 'customer@email.com';
-                //  CheckoutResponse response = await plugin.checkout(
-                //    context context,
-                //    method: CheckoutMethod.card, // Defaults to CheckoutMethod.selectable
-                //    charge: charge,
-                //  );
+              // postOrder(
+              //   fname: fname.text,
+              //   lname: lname.text,
+              //   company: company.text,
+              //   city: city.text,
+              //   country: country.text,
+              //   state: state.text,
+              //   phoneNo: phone.text,
+              //   postCode: postCode.text,
+              //   address1: address1.text,
+              //   address2: address2.text,
+              //   fnameS: fname.text,
+              //   lnameS: lname.text,
+              //   companyS: company.text,
+              //   cityS: city.text,
+              //   countryS: country.text,
+              //   stateS: state.text,
+              //   address1S: address1.text,
+              //   address2S: address2.text,
+              //   postCodeS: postCode.text,
+              // ).whenComplete(() async {
+              //   // Get.to(() => CheckoutMethodSelectable());
 
-                // var realAmount = _amount * 1000;
-                // print(realAmount);
-                // final charge = Charge()
-                //   ..email = _email
-                //   ..amount = realAmount
-                //   ..reference = 'ref_${DateTime.now().millisecondsSinceEpoch}';
-                // final res =
-                //     await PaystackClient.checkout(context, charge: charge);
-
-                // if (res.status) {
-                //   _message = 'Charge was successful. Ref: ${res.reference}';
-                // } else {
-                //   _message = 'Failed: ${res.message}';
-                // }
-                // setState(() {});
-
-                setState(() {
-                  if (isloading == true) {
-                    isloading = false;
-                  }
-                });
-              });
+              // setState(() {
+              //   if (isloading == true) {
+              //     isloading = false;
+              //   }
+              // });
+              // });
               // Navigator.pop(context);
             } catch (e) {
               showError(e.toString());

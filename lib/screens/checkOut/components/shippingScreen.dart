@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:ecomstore/constants.dart';
 import 'package:ecomstore/data_layer/post_billing.dart';
+import 'package:ecomstore/screens/choose_payment/choosePayment.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -509,30 +510,32 @@ class _ShippingScreenState extends State<ShippingScreen> {
                           // onPressed: postTest(),
                           onPressed: () {
                             try {
-                              postOrder(
-                                fname: widget.bFname,
-                                lname: widget.bLname,
-                                company: widget.bCompany,
-                                city: widget.bCity,
-                                country: widget.bCountry,
-                                state: widget.bState,
-                                phoneNo: widget.bPhoneNo,
-                                postCode: widget.bPostCode,
-                                address1: widget.bAddress1,
-                                address2: widget.bAddress2,
-                                fnameS: fname.text,
-                                lnameS: lname.text,
-                                cityS: city.text,
-                                countryS: country.text,
-                                stateS: state.text,
-                                address1S: address1.text,
-                                address2S: address2.text,
-                                postCodeS: postCode.text,
-                              ).whenComplete(setState(() {
-                                if (isloading == true) {
-                                  isloading = false;
-                                }
-                              }));
+                              Get.to(ChoosePaymentScreen());
+
+                              // postOrder(
+                              //   fname: widget.bFname,
+                              //   lname: widget.bLname,
+                              //   company: widget.bCompany,
+                              //   city: widget.bCity,
+                              //   country: widget.bCountry,
+                              //   state: widget.bState,
+                              //   phoneNo: widget.bPhoneNo,
+                              //   postCode: widget.bPostCode,
+                              //   address1: widget.bAddress1,
+                              //   address2: widget.bAddress2,
+                              //   fnameS: fname.text,
+                              //   lnameS: lname.text,
+                              //   cityS: city.text,
+                              //   countryS: country.text,
+                              //   stateS: state.text,
+                              //   address1S: address1.text,
+                              //   address2S: address2.text,
+                              //   postCodeS: postCode.text,
+                              // ).whenComplete(setState(() {
+                              //   if (isloading == true) {
+                              //     isloading = false;
+                              //   }
+                              // }));
                             } catch (e) {
                               showError('Error please try again');
                               // print(e);
