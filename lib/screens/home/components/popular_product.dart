@@ -1,4 +1,5 @@
 import 'package:ecomstore/controllers/allProductController.dart';
+import 'package:ecomstore/screens/seeAllPopular/seeAllPopular.dart';
 import 'package:flutter/material.dart';
 import 'package:ecomstore/components/product_card.dart';
 import 'package:ecomstore/models/Product.dart';
@@ -19,7 +20,8 @@ class PopularProducts extends StatelessWidget {
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-          child: SectionTitle(title: "Popular Products", press: () {}),
+          child: SectionTitle(
+              title: "Popular Products", press: () => Get.to(SeeAllPopular())),
         ),
         SizedBox(height: getProportionateScreenWidth(20)),
         SingleChildScrollView(

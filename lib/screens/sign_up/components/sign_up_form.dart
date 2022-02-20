@@ -16,7 +16,7 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
-  late String  email;
+  late String email;
   late String fname;
   late String username;
   late String lname;
@@ -41,7 +41,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
-        final controller = SignUpController();
+    final controller = SignUpController();
 
     return Form(
       key: _formKey,
@@ -63,11 +63,9 @@ class _SignUpFormState extends State<SignUpForm> {
           DefaultButton(
             text: "Continue",
             press: () {
-
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-                 controller.signup(fname, lname,
-                      email, password, username);
+                controller.signup(fname, lname, email, password, username);
                 // print(fname);
                 // print(lname);
                 // print(username);

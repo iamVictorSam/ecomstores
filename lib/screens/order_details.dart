@@ -181,8 +181,13 @@ class _OrderDetailsState extends State<OrderDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text(
+          'Order Details',
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
+      backgroundColor: Color.fromARGB(255, 250, 248, 248),
       body: isloading
           ? Center(child: CircularProgressIndicator())
           : Container(
@@ -211,20 +216,16 @@ class _OrderDetailsState extends State<OrderDetails> {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10.0),
                           child: Text(
-                            'Products puchased',
+                            'Products purchased',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18),
                           ),
                         ),
                         Container(
-                          height: getProportionateScreenHeight(250),
-                          width: double.infinity,
-                          child: GridView.builder(
-                              scrollDirection: Axis.horizontal,
+                          height: 150,
+                          child: ListView.builder(
+                              // scrollDirection: Axis.horizontal,
                               itemCount: widget.retrieveOrder.lineItems.length,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2, childAspectRatio: 0.4),
                               itemBuilder: (BuildContext context, int index) {
                                 print(index);
 
@@ -598,33 +599,19 @@ class LineItemes extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-          child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
         children: [
-          // Container(
-          //   height: getProportionateScreenHeight(80),
-          //   width: getProportionateScreenWidth(80),
-          //   decoration: BoxDecoration(
-          //     // color: kPrimaryColor,
-          //     borderRadius: BorderRadius.all(
-          //       Radius.circular(8),
-          //     ),
-          //   ),
-          //   child: Image.network(image),
-          // ),
-          Column(children: [
-            Expanded(
-                child: Container(
-              width: 150,
-              child:
-                  Text(itemName, style: TextStyle(fontWeight: FontWeight.bold)),
-            )),
-            Expanded(
-              child: Text(price,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: kPrimaryColor)),
-            ),
-          ]),
+          ListTile(
+            title: Text('Product name'),
+            trailing:
+                Text(itemName, style: TextStyle(fontWeight: FontWeight.bold)),
+          ),
+          ListTile(
+            title: Text('Price'),
+            trailing: Text(price,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: kPrimaryColor)),
+          )
         ],
       )),
     );

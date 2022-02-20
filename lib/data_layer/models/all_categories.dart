@@ -21,6 +21,7 @@ class Categories {
     required this.image,
     required this.menuOrder,
     required this.count,
+    required this.colorCode,
   });
 
   int id;
@@ -32,6 +33,7 @@ class Categories {
   dynamic image;
   int menuOrder;
   int count;
+  String colorCode;
 
   factory Categories.fromJson(Map<String, dynamic> json) => Categories(
         id: json["id"],
@@ -43,6 +45,7 @@ class Categories {
         image: json["image"],
         menuOrder: json["menu_order"],
         count: json["count"],
+        colorCode: json["color_code"],
       );
 
   Map<String, dynamic> toJson() => {

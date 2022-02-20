@@ -1,7 +1,10 @@
 import 'package:ecomstore/controllers/categoriesController.dart';
 import 'package:ecomstore/controllers/userInforController.dart';
+import 'package:ecomstore/screens/cateScreen/cateScreen.dart';
+import 'package:ecomstore/screens/seeAllCategories/seeAllCategories.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../../size_config.dart';
 import 'section_title.dart';
@@ -13,6 +16,7 @@ class SpecialOffers extends StatelessWidget {
 
   final cateCtrl = Get.put(GetAllCategoriesController());
   final userInfo = Get.put(GetUserInfoController());
+  final box = GetStorage();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,7 +26,7 @@ class SpecialOffers extends StatelessWidget {
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: SectionTitle(
             title: "Special for you",
-            press: () {},
+            press: () => Get.to(SpecialOfferSeeAll()),
           ),
         ),
         SizedBox(height: getProportionateScreenWidth(20)),
@@ -38,7 +42,14 @@ class SpecialOffers extends StatelessWidget {
                             // image: cateCtrl.getAllcategories[index].image == ''
                             //     ? FlutterLogo()
                             //     : cateCtrl.getAllcategories[index].image,
-                            press: () {},
+                            press: () {
+                              box
+                                  .write('cateId',
+                                      cateCtrl.getAllcategories[index].id)
+                                  .whenComplete(
+                                      () => Get.to(CategoriesScreen()));
+                              print('${box.read('cateId')} from home');
+                            },
                           )),
                   // SpecialOfferCard(
                   //   image: "assets/images/Image Banner 2.png",
@@ -124,7 +135,7 @@ class SpecialOfferCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        TextSpan(text: "$numOfBrands Brands")
+                        TextSpan(text: "$numOfBrands Products")
                       ],
                     ),
                   ),

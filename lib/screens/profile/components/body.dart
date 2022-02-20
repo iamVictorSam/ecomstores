@@ -3,6 +3,7 @@ import 'package:ecomstore/controllers/orderDetailsController.dart';
 import 'package:ecomstore/controllers/userInforController.dart';
 import 'package:ecomstore/data_layer/userInfo.dart';
 import 'package:ecomstore/screens/orders/orders.dart';
+import 'package:ecomstore/screens/settings/settings.dart';
 import 'package:ecomstore/screens/sign_in/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,7 +22,7 @@ class Body extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
-          ProfilePic(),
+          // ProfilePic(),
           SizedBox(height: 20),
           ProfileMenu(
             text: "Orders",
@@ -29,14 +30,9 @@ class Body extends StatelessWidget {
             press: () => Get.to(() => Orders()),
           ),
           ProfileMenu(
-            text: "Notifications",
-            icon: "assets/icons/Bell.svg",
-            press: () {},
-          ),
-          ProfileMenu(
             text: "Settings",
             icon: "assets/icons/Settings.svg",
-            press: () {},
+            press: () => Get.to(Settings()),
           ),
           ProfileMenu(
             text: "Help Center",

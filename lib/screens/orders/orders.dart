@@ -20,7 +20,7 @@ class Orders extends StatelessWidget {
       backgroundColor: Color(0xffF5F5F5),
       appBar: AppBar(
         title: Text(
-          'Order',
+          'My Orders',
           style: TextStyle(color: Colors.black),
         ),
       ),
@@ -62,6 +62,9 @@ class Orders extends StatelessWidget {
                 )
               : Column(
                   children: [
+                    SizedBox(
+                      height: 20,
+                    ),
                     ...List.generate(
                       rOdersController.getOrders.length,
                       (index) => OrderCard(
