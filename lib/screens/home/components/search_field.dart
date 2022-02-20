@@ -23,6 +23,7 @@ class SearchField extends StatelessWidget {
                 horizontal: getProportionateScreenWidth(20),
                 vertical: getProportionateScreenWidth(9)),
             border: InputBorder.none,
+            enabled: false,
             focusedBorder: InputBorder.none,
             enabledBorder: InputBorder.none,
             hintText: "Search product",

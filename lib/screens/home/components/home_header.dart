@@ -1,4 +1,5 @@
 import 'package:ecomstore/controllers/cartController.dart';
+import 'package:ecomstore/search.dart';
 import 'package:flutter/material.dart';
 import 'package:ecomstore/screens/cart/cart_screen.dart';
 import 'package:get/get.dart';
@@ -21,7 +22,9 @@ class HomeHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SearchField(),
+          // GestureDetector(
+          //     onTap: () => Get.to(() => ProductsSearch()),
+          //     child: SearchField()),
           // Obx(() => IconBtnWithCounter(
           //       numOfitem: cartController.cartCount,
           //       svgSrc: "assets/icons/Cart Icon.svg",

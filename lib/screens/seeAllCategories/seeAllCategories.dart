@@ -1,8 +1,10 @@
 import 'package:ecomstore/controllers/categoriesController.dart';
+import 'package:ecomstore/screens/cateScreen/cateScreen.dart';
 import 'package:ecomstore/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 import '../home/components/home_header.dart';
 
@@ -11,6 +13,8 @@ class SpecialOfferSeeAll extends StatelessWidget {
   final cateController = Get.put(GetAllCategoriesController());
   @override
   Widget build(BuildContext context) {
+    final cateCtrl = Get.put(GetAllCategoriesController());
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -28,6 +32,8 @@ class SpecialOfferSeeAll extends StatelessWidget {
                       ...List.generate(cateController.getAllcategories.length,
                           (index) {
                         return SpecialOfferAllCard(
+                          bgColor:
+                              cateController.getAllcategories[index].colorCode,
                           category: cateController.getAllcategories[index].name,
                           image: cateController.getAllcategories[index].image ==
                                   null
@@ -39,14 +45,11 @@ class SpecialOfferSeeAll extends StatelessWidget {
                                   : cateController
                                       .getAllcategories[index].count,
                           press: () {
-                            box.write('cateId',
-                                cateController.getAllcategories[index].id);
+                            box
+                                .write('cateId',
+                                    cateCtrl.getAllcategories[index].id)
+                                .whenComplete(() => Get.to(CategoriesScreen()));
                             print('${box.read('cateId')} from home');
-                            Future.delayed(Duration(seconds: 1), () {
-                              // Get.to(() => CategoriesScreen(
-                              //       micate: cateController.categories[index],
-                              //     ));
-                            });
                           },
                         );
                       }),
@@ -72,9 +75,11 @@ class SpecialOfferAllCard extends StatelessWidget {
     required this.image,
     required this.numOfBrands,
     required this.press,
+    required this.bgColor,
   }) : super(key: key);
 
   final String category, image;
+  final String bgColor;
   final int numOfBrands;
   final GestureTapCallback press;
 
@@ -100,14 +105,7 @@ class SpecialOfferAllCard extends StatelessWidget {
                 // ),
                 Container(
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xFF343434).withOpacity(0.4),
-                        Color(0xFF343434).withOpacity(0.15),
-                      ],
-                    ),
+                    color: HexColor('$bgColor'),
                   ),
                 ),
                 Padding(

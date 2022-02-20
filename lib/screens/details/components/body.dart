@@ -14,7 +14,7 @@ import 'product_images.dart';
 class Body extends StatelessWidget {
   final cartController = Get.put(CartController());
 
-  final AllProducts product;
+  final product;
 
   Body({Key? key, required this.product}) : super(key: key);
 

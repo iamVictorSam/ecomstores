@@ -1,3 +1,4 @@
+import 'package:ecomstore/screens/orders/orders.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,7 @@ class Purchased extends StatelessWidget {
       onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(title: Center(child: Text('Order Success'))),
-        body: Container(
+        body: SingleChildScrollView(
           child: Column(
             children: [
               Row(
@@ -119,7 +120,7 @@ class Purchased extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 10),
                       child: DefaultButton(
-                          press: () => Get.offAll(() => HomeScreen()),
+                          press: () => Get.offAll(() => Orders()),
                           text: 'Continue shopping'),
                     )
                     // SizedBox(

@@ -5,6 +5,7 @@ import 'package:ecomstore/screens/seeAllCategories/seeAllCategories.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 import '../../../size_config.dart';
 import 'section_title.dart';
@@ -37,6 +38,8 @@ class SpecialOffers extends StatelessWidget {
                   ...List.generate(
                       cateCtrl.getAllcategories.length,
                       (index) => SpecialOfferCard(
+                            colorCode:
+                                cateCtrl.getAllcategories[index].colorCode,
                             category: cateCtrl.getAllcategories[index].name,
                             numOfBrands: cateCtrl.getAllcategories[index].count,
                             // image: cateCtrl.getAllcategories[index].image == ''
@@ -78,11 +81,13 @@ class SpecialOfferCard extends StatelessWidget {
     required this.category,
     // required this.image,
     required this.numOfBrands,
+    required this.colorCode,
     required this.press,
   }) : super(key: key);
 
   final String category; /*image */
   final int numOfBrands;
+  final String colorCode;
   final GestureTapCallback press;
 
   @override
@@ -108,16 +113,17 @@ class SpecialOfferCard extends StatelessWidget {
                 //   color: Colors.purple,
                 // ),
                 Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xFF343434).withOpacity(0.4),
-                        Color(0xFF343434).withOpacity(0.15),
-                      ],
-                    ),
-                  ),
+                  color: HexColor(colorCode),
+                  // decoration: BoxDecoration(
+                  //   gradient: LinearGradient(
+                  //     begin: Alignment.topCenter,
+                  //     end: Alignment.bottomCenter,
+                  //     colors: [
+                  //       Color(0xFF343434).withOpacity(0.4),
+                  //       Color(0xFF343434).withOpacity(0.15),
+                  //     ],
+                  //   ),
+                  // ),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(

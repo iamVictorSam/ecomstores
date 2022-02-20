@@ -179,14 +179,14 @@ class ProductOwner {
   });
 
   int id;
-  Name name;
+  Name? name;
   ShopName shopName;
   String url;
   Address address;
 
   factory ProductOwner.fromJson(Map<String, dynamic> json) => ProductOwner(
         id: json["id"],
-        name: nameValues.map[json["name"]]!,
+        name: nameValues.map[json["name"]],
         shopName: shopNameValues.map[json["shop_name"]]!,
         url: json["url"],
         address: Address.fromJson(json["address"]),

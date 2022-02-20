@@ -1,151 +1,76 @@
 import 'dart:convert';
-
 import 'package:ecomstore/controllers/cartController.dart';
+import 'package:ecomstore/helper/baseController.dart';
 import 'package:ecomstore/screens/choose_payment/choosePayment.dart';
+import 'package:ecomstore/services/base_client.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 final box = GetStorage();
 
-postOrder({
-  String? fname,
-  lname,
-  company,
-  city,
-  state,
-  country,
-  address1,
-  address2,
-  postCode,
-  phoneNo,
-  fnameS,
-  lnameS,
-  companyS,
-  cityS,
-  stateS,
-  countryS,
-  address1S,
-  address2S,
-  postCodeS,
-}) async {
-/**
- * {
-    "billing": {
-        "first_name": "Nath",
-        "last_name": "John",
-        "company": "Abrack",
-        "address_1": "Us",
-        "address_2": "UK",
-        "city": "Nevada",
-        "postcode": "533112",
-        "country": "USA",
-        "state": "Alabama",
-        "email": "deelesisuanu@gmail.com",
-        "phone": "+2349031382488"
-    },
-    "shipping": {
-        "first_name": "Nath",
-        "last_name": "John",
-        "company": "Abrack",
-        "address_1": "Us",
-        "address_2": "UK",
-        "city": "Nevada",
-        "postcode": "533112",
-        "country": "USA",
-        "state": "Alabama"
-    }
-}
- */
+class PostBillingController with BaseController {
+  postBilling({
+    required String fname,
+    required String lname,
+    required String company,
+    required String city,
+    required String state,
+    required String country,
+    required String address1,
+    required String address2,
+    required String postCode,
+    required String phoneNo,
+    required String fnameS,
+    required String lnameS,
+    required String companyS,
+    required String cityS,
+    required String stateS,
+    required String countryS,
+    required String address1S,
+    required String address2S,
+    required String postCodeS,
+  }) async {
+    final box = GetStorage();
+    String id = box.read('userId').toString();
+    String email = box.read('email');
+    print('id $id');
+    print('$email email');
 
-  final box = GetStorage();
-  String id = box.read('userId').toString();
-  String email = box.read('email');
-  print('id $id');
-  print('$email email');
-  final uri = Uri.parse(
-      'https://wp-rest-service.herokuapp.com/api/v1/user/users/customer/347');
-  // var requestBody = {
-  //   "billing": {
-  //     "first_name": "$fname",
-  //     "last_name": "$lname",
-  //     "company": "$company",
-  //     "address_1": "$address1",
-  //     "address_2": "$address2",
-  //     "city": "$city",
-  //     "state": "$state",
-  //     "postcode": "$postCode",
-  //     "country": "$country",
-  //     "email": "$email",
-  //     "phone": "$phoneNo"
-  //   },
-  //   "shipping": {
-  //     "first_name": "$fnameS",
-  //     "last_name": "$lnameS",
-  //     "company": "$companyS",
-  //     "address_1": "$address1S",
-  //     "address_2": "$address2S",
-  //     "city": "$cityS",
-  //     "postcode": "$postCodeS",
-  //     "country": "$countryS",
-  //     "state": "$stateS",
-  //   },
-  // };
-  var requestBody = {
-    "billing": {
-      "first_name": "Nath",
-      "last_name": "John",
-      "company": "Abrack",
-      "address_1": "Us",
-      "address_2": "UK",
-      "city": "Nevada",
-      "postcode": "533112",
-      "country": "USA",
-      "state": "Alabama",
-      "email": "deelesisuanu@gmail.com",
-      "phone": "+2349031382488"
-    },
-    "shipping": {
-      "first_name": "Nath",
-      "last_name": "John",
-      "company": "Abrack",
-      "address_1": "Us",
-      "address_2": "UK",
-      "city": "Nevada",
-      "postcode": "533112",
-      "country": "USA",
-      "state": "Alabama"
-    }
-  };
-  print(requestBody);
-  Get.back();
+    var request = {
+      "first_name_billing": fname,
+      "last_name_billing": lname,
+      "company_billing": company,
+      "address_1_billing": address1,
+      "address_2_billing": address2,
+      "city_billing": city,
+      "state_billing": state,
+      "postcode_billing": postCode,
+      "country_billing": country,
+      "email_billing": email,
+      "phone_billing": phoneNo,
+      "first_name_shipping": fnameS,
+      "last_name_shipping": lnameS,
+      "company_shipping": companyS,
+      "address_1_shipping": address1S,
+      "address_2_shipping": address2S,
+      "city_shipping": cityS,
+      "postcode_shipping": postCodeS,
+      "country_shipping": countryS,
+      "state_shipping": stateS,
+    };
 
-  try {
-    http.Response response = await http.put(
-      uri,
-      body: jsonEncode(requestBody),
-    );
-    // var jsonString = response.body;
-    if (response == null) return;
-    var result = jsonDecode(response.body);
-
-    if (result['status'] == 'success') {
-      // processPayment();
-      Get.to(() => ChoosePaymentScreen());
+    showLoading('Loading');
+    print(request);
+    try {
+      await BaseClient()
+          .postSignUp('/api/v1/user/users/customer/$id', request)
+          .catchError(handleError);
+      Get.offAll(() => ChoosePaymentScreen());
+    } catch (e) {
+      print(e);
     }
-    // Get.to(() => ChoosePaymentScreen());
-    var jsonString = response.body;
-    print(jsonDecode(jsonString));
-  } catch (e) {
-    print(e);
+    // hideLoading();
+    // else{GetStorage().write('token', token);}
   }
-
-  // var arrayOrder = createOrderFromJson(jsonString);
-  // String orderId = arrayOrder.data.orderId;
-
-  // final box = GetStorage();
-  // box.write('orderId', orderId);
-  // print(box.read('orderId'));
-
-  // CreateOrder
 }

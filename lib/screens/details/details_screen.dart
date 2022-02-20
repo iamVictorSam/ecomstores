@@ -1,6 +1,5 @@
 import 'package:ecomstore/data_layer/models/all_products.dart';
 import 'package:flutter/material.dart';
-
 import '../../models/Product.dart';
 import 'components/body.dart';
 import 'components/custom_app_bar.dart';
@@ -18,13 +17,13 @@ class DetailsScreen extends StatelessWidget {
         preferredSize: Size.fromHeight(AppBar().preferredSize.height),
         child: CustomAppBar(),
       ),
-      body: Body(product: agrs.product),
+      body: SafeArea(child: Body(product: agrs.product)),
     );
   }
 }
 
 class ProductDetailsArguments {
-  final AllProducts product;
+  final product;
 
   ProductDetailsArguments({required this.product});
 }

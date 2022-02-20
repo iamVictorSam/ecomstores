@@ -70,20 +70,22 @@ class ProductsController with BaseController {
 
   Future getAllCategoriesProduct() async {
     // showLoading('Fetching data...');
-    var id = GetStorage().read('ca');
+    var id = GetStorage().read('cateId');
+    print('this is id $id');
     var response = await BaseClient()
         .get(
-          'api/v1/wp/products/main/categories/$id',
+          '/api/v1/wp/products/main/categories/$id',
         )
         .catchError(handleError);
     if (response == null) return;
     // hideLoading();
+    print(response);
 
     final result = jsonDecode(response) as Map;
 
     final data = result['products'] as List;
     print(data);
     final datu = jsonEncode(data);
-    return allProductsFromJson(datu);
+    return categoryProductFromJson(datu);
   }
 }

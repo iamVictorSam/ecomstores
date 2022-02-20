@@ -1,12 +1,16 @@
+import 'package:ecomstore/controllers/cartController.dart';
+import 'package:ecomstore/screens/cart/cart_screen.dart';
+import 'package:ecomstore/screens/home/components/icon_btn_with_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ecomstore/constants.dart';
+import 'package:get/get.dart';
 
 import '../../../size_config.dart';
 
 class CustomAppBar extends StatelessWidget {
   // final double rating;
-
+  final cartController = Get.put(CartController());
   // CustomAppBar({required this.rating});
 
   @override
@@ -41,6 +45,12 @@ class CustomAppBar extends StatelessWidget {
               ),
             ),
             Spacer(),
+            Obx(() => IconBtnWithCounter(
+                  numOfitem: cartController.cartCount,
+                  svgSrc: "assets/icons/Cart Icon.svg",
+                  press: () =>
+                      Navigator.pushNamed(context, CartScreen.routeName),
+                )),
             // Container(
             //   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
             //   decoration: BoxDecoration(

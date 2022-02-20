@@ -9,7 +9,7 @@ class CartCard extends StatelessWidget {
     required this.cart,
   }) : super(key: key);
 
-  final AllProducts cart;
+  final cart;
 
   @override
   Widget build(BuildContext context) {

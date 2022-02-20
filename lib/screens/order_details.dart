@@ -433,66 +433,66 @@ class _OrderDetailsState extends State<OrderDetails> {
                             ]),
                           ),
                         ),
-                        widget.retrieveOrder.status.contains('pending')
-                            ? DefaultButton(
-                                text: 'Pay Again',
-                                press: () {
-                                  try {
-                                    setState(() {
-                                      if (isloading == false) {
-                                        isloading = !isloading;
-                                      }
-                                    });
-                                    // postOrder(
-                                    //   fname: widget
-                                    //       .retrieveOrder.billing.firstName,
-                                    //   lname:
-                                    //       widget.retrieveOrder.billing.lastName,
-                                    //   // email: email.text,
-                                    //   city: widget.retrieveOrder.billing.city,
-                                    //   country:
-                                    //       widget.retrieveOrder.billing.city,
-                                    //   state: widget
-                                    //       .retrieveOrder.billing.billingState,
-                                    //   phoneNo:
-                                    //       widget.retrieveOrder.billing.phone,
-                                    //   postCode:
-                                    //       widget.retrieveOrder.billing.postcode,
-                                    //   address1:
-                                    //       widget.retrieveOrder.billing.address1,
-                                    //   address2:
-                                    //       widget.retrieveOrder.billing.address2,
-                                    //   fnameS: widget
-                                    //       .retrieveOrder.shipping.firstName,
-                                    //   lnameS: widget
-                                    //       .retrieveOrder.shipping.lastName,
-                                    //   cityS: widget.retrieveOrder.shipping.city,
-                                    //   countryS:
-                                    //       widget.retrieveOrder.shipping.country,
-                                    //   stateS: widget
-                                    //       .retrieveOrder.shipping.shippingState,
-                                    //   address1S: widget
-                                    //       .retrieveOrder.shipping.address1,
-                                    //   address2S: widget
-                                    //       .retrieveOrder.shipping.address2,
-                                    //   postCodeS: widget
-                                    //       .retrieveOrder.shipping.postcode,
-                                    // ).whenComplete(() {
-                                    //   // Get.to(() => CheckoutMethodSelectable());
-                                    //   setState(() {
-                                    //     if (isloading == true) {
-                                    //       isloading = false;
-                                    //     }
-                                    //   });
-                                    //   // _processPayment();
-                                    // });
-                                    // Navigator.pop(context);
-                                  } catch (e) {
-                                    // showError(e);
-                                  }
-                                  // _processPayment();
-                                })
-                            : Container(),
+                        // widget.retrieveOrder.status.contains('pending')
+                        //     ? DefaultButton(
+                        //         text: 'Pay Again',
+                        //         press: () {
+                        //           try {
+                        //             setState(() {
+                        //               if (isloading == false) {
+                        //                 isloading = !isloading;
+                        //               }
+                        //             });
+                        //             // postOrder(
+                        //             //   fname: widget
+                        //             //       .retrieveOrder.billing.firstName,
+                        //             //   lname:
+                        //             //       widget.retrieveOrder.billing.lastName,
+                        //             //   // email: email.text,
+                        //             //   city: widget.retrieveOrder.billing.city,
+                        //             //   country:
+                        //             //       widget.retrieveOrder.billing.city,
+                        //             //   state: widget
+                        //             //       .retrieveOrder.billing.billingState,
+                        //             //   phoneNo:
+                        //             //       widget.retrieveOrder.billing.phone,
+                        //             //   postCode:
+                        //             //       widget.retrieveOrder.billing.postcode,
+                        //             //   address1:
+                        //             //       widget.retrieveOrder.billing.address1,
+                        //             //   address2:
+                        //             //       widget.retrieveOrder.billing.address2,
+                        //             //   fnameS: widget
+                        //             //       .retrieveOrder.shipping.firstName,
+                        //             //   lnameS: widget
+                        //             //       .retrieveOrder.shipping.lastName,
+                        //             //   cityS: widget.retrieveOrder.shipping.city,
+                        //             //   countryS:
+                        //             //       widget.retrieveOrder.shipping.country,
+                        //             //   stateS: widget
+                        //             //       .retrieveOrder.shipping.shippingState,
+                        //             //   address1S: widget
+                        //             //       .retrieveOrder.shipping.address1,
+                        //             //   address2S: widget
+                        //             //       .retrieveOrder.shipping.address2,
+                        //             //   postCodeS: widget
+                        //             //       .retrieveOrder.shipping.postcode,
+                        //             // ).whenComplete(() {
+                        //             //   // Get.to(() => CheckoutMethodSelectable());
+                        //             //   setState(() {
+                        //             //     if (isloading == true) {
+                        //             //       isloading = false;
+                        //             //     }
+                        //             //   });
+                        //             //   // _processPayment();
+                        //             // });
+                        //             // Navigator.pop(context);
+                        //           } catch (e) {
+                        //             // showError(e);
+                        //           }
+                        //           // _processPayment();
+                        //         })
+                        //     : Container(),
                         SizedBox(height: 20)
                       ],
                     ),

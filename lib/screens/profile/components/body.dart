@@ -30,8 +30,8 @@ class Body extends StatelessWidget {
             press: () => Get.to(() => Orders()),
           ),
           ProfileMenu(
-            text: "Settings",
-            icon: "assets/icons/Settings.svg",
+            text: "Profile",
+            icon: "assets/icons/Person.svg",
             press: () => Get.to(Settings()),
           ),
           ProfileMenu(

@@ -13,7 +13,7 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await PaystackClient.initialize(
-      'pk_live_3c7b2be1f48b19309aac1e7791e036f7511d139a');
+      'pk_test_d094408d5fd048bc50fa9f99c599ff7986655b68');
   runApp(MyApp());
 }
 

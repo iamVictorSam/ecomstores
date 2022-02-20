@@ -4,13 +4,19 @@ import 'package:ecomstore/data_layer/productsController.dart';
 import 'package:get/get.dart';
 
 class GetAllCatProductsController extends GetxController {
-  var getAllProducts = <AllProducts>[].obs;
+  var getAllProducts = <CategoryProduct>[].obs;
   var isLoading = true.obs;
 
   @override
   void onInit() {
     super.onInit();
     fetchAllProduct();
+  }
+
+  @override
+  void dispose() {
+    fetchAllProduct();
+    super.dispose();
   }
 
   void fetchAllProduct() async {

@@ -52,6 +52,8 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
     plugin.initialize(publicKey: publicKey);
   }
 
+  final posting = PostBillingController();
+
   final box = GetStorage();
 
   // final billingController = BillingController.to;
@@ -216,37 +218,41 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
                   isloading = !isloading;
                 }
               });
-              Get.to(ChoosePaymentScreen());
+              // Get.back();
+              // Get.to(ChoosePaymentScreen());
+              Navigator.pop(context);
               print(company.text);
-              // postOrder(
-              //   fname: fname.text,
-              //   lname: lname.text,
-              //   company: company.text,
-              //   city: city.text,
-              //   country: country.text,
-              //   state: state.text,
-              //   phoneNo: phone.text,
-              //   postCode: postCode.text,
-              //   address1: address1.text,
-              //   address2: address2.text,
-              //   fnameS: fname.text,
-              //   lnameS: lname.text,
-              //   companyS: company.text,
-              //   cityS: city.text,
-              //   countryS: country.text,
-              //   stateS: state.text,
-              //   address1S: address1.text,
-              //   address2S: address2.text,
-              //   postCodeS: postCode.text,
-              // ).whenComplete(() async {
-              //   // Get.to(() => CheckoutMethodSelectable());
+              posting
+                  .postBilling(
+                fname: fname.text,
+                lname: lname.text,
+                company: company.text,
+                city: city.text,
+                country: country.text,
+                state: state.text,
+                phoneNo: phone.text,
+                postCode: postCode.text,
+                address1: address1.text,
+                address2: address2.text,
+                fnameS: fname.text,
+                lnameS: lname.text,
+                companyS: company.text,
+                cityS: city.text,
+                countryS: country.text,
+                stateS: state.text,
+                address1S: address1.text,
+                address2S: address2.text,
+                postCodeS: postCode.text,
+              )
+                  .whenComplete(() async {
+                // Get.to(() => CheckoutMethodSelectable());
 
-              // setState(() {
-              //   if (isloading == true) {
-              //     isloading = false;
-              //   }
-              // });
-              // });
+                setState(() {
+                  if (isloading == true) {
+                    isloading = false;
+                  }
+                });
+              });
               // Navigator.pop(context);
             } catch (e) {
               showError(e.toString());

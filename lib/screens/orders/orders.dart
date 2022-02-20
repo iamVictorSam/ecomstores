@@ -67,17 +67,20 @@ class Orders extends StatelessWidget {
                     ),
                     ...List.generate(
                       rOdersController.getOrders.length,
-                      (index) => OrderCard(
-                        orderCode: rOdersController.getOrders[index].orderKey,
-                        orderStatus: rOdersController.getOrders[index].status,
-                        time: 'January 22, 2021',
-                        price: rOdersController.getOrders[index].total,
-                        onPressed: () {
-                          Get.to(() => OrderDetails(
-                                retrieveOrder:
-                                    rOdersController.getOrders[index],
-                              ));
-                        },
+                      (index) => Padding(
+                        padding: const EdgeInsets.only(bottom: 20.0),
+                        child: OrderCard(
+                          orderCode: rOdersController.getOrders[index].orderKey,
+                          orderStatus: rOdersController.getOrders[index].status,
+                          time: 'January 22, 2021',
+                          price: rOdersController.getOrders[index].total,
+                          onPressed: () {
+                            Get.to(() => OrderDetails(
+                                  retrieveOrder:
+                                      rOdersController.getOrders[index],
+                                ));
+                          },
+                        ),
                       ),
                     )
 

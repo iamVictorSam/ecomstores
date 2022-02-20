@@ -66,6 +66,8 @@ class _ShippingScreenState extends State<ShippingScreen> {
   Timer? _timer;
   bool isloading = false;
 
+  final posting = PostBillingController();
+
   final box = GetStorage();
 
   // final billingController = BillingController.to;
@@ -510,32 +512,57 @@ class _ShippingScreenState extends State<ShippingScreen> {
                           // onPressed: postTest(),
                           onPressed: () {
                             try {
-                              Get.to(ChoosePaymentScreen());
-
-                              // postOrder(
-                              //   fname: widget.bFname,
-                              //   lname: widget.bLname,
-                              //   company: widget.bCompany,
-                              //   city: widget.bCity,
-                              //   country: widget.bCountry,
-                              //   state: widget.bState,
-                              //   phoneNo: widget.bPhoneNo,
-                              //   postCode: widget.bPostCode,
-                              //   address1: widget.bAddress1,
-                              //   address2: widget.bAddress2,
+                              // Get.to(ChoosePaymentScreen());
+                              //                  posting
+                              //     .postBilling(
+                              //   fname: fname.text,
+                              //   lname: lname.text,
+                              //   company: company.text,
+                              //   city: city.text,
+                              //   country: country.text,
+                              //   state: state.text,
+                              //   phoneNo: phone.text,
+                              //   postCode: postCode.text,
+                              //   address1: address1.text,
+                              //   address2: address2.text,
                               //   fnameS: fname.text,
                               //   lnameS: lname.text,
+                              //   companyS: company.text,
                               //   cityS: city.text,
                               //   countryS: country.text,
                               //   stateS: state.text,
                               //   address1S: address1.text,
                               //   address2S: address2.text,
                               //   postCodeS: postCode.text,
-                              // ).whenComplete(setState(() {
-                              //   if (isloading == true) {
-                              //     isloading = false;
-                              //   }
-                              // }));
+                              // )
+
+                              posting
+                                  .postBilling(
+                                fname: widget.bFname,
+                                lname: widget.bLname,
+                                company: widget.bCompany,
+                                city: widget.bCity,
+                                country: widget.bCountry,
+                                companyS: widget.bCompany,
+                                state: widget.bState,
+                                phoneNo: widget.bPhoneNo,
+                                postCode: widget.bPostCode,
+                                address1: widget.bAddress1,
+                                address2: widget.bAddress2,
+                                fnameS: fname.text,
+                                lnameS: lname.text,
+                                cityS: city.text,
+                                countryS: country.text,
+                                stateS: state.text,
+                                address1S: address1.text,
+                                address2S: address2.text,
+                                postCodeS: postCode.text,
+                              )
+                                  .whenComplete(setState(() {
+                                if (isloading == true) {
+                                  isloading = false;
+                                }
+                              }));
                             } catch (e) {
                               showError('Error please try again');
                               // print(e);

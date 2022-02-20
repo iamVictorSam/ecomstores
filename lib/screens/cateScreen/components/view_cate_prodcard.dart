@@ -17,7 +17,7 @@ class ViewCateProductCard extends StatelessWidget {
   }) : super(key: key);
 
   final double width, aspectRetio;
-  final AllProducts product;
+  final product;
   // final favController = Get.put(FavController());
 
   @override

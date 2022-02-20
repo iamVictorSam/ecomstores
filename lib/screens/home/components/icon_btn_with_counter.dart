@@ -10,10 +10,12 @@ class IconBtnWithCounter extends StatelessWidget {
     required this.svgSrc,
     this.numOfitem = 0,
     required this.press,
+    this.color = Colors.grey,
   }) : super(key: key);
 
   final String svgSrc;
   final int numOfitem;
+  final Color color;
   final GestureTapCallback press;
 
   @override
