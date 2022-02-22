@@ -6,13 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:flutter_paystack_client/flutter_paystack_client.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ChoosePaymentScreen extends StatelessWidget {
   ChoosePaymentScreen({Key? key}) : super(key: key);
   final createOrder = OrdersControlller();
   final cartController = Get.put(CartController());
 
-  String _email = 'iamvictorsam@gmail.com';
+  String _email = GetStorage().read('email');
   String _message = ' Purchase payment from email';
 
   var publicKey = '[YOUR_PAYSTACK_PUBLIC_KEY]';
