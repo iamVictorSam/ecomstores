@@ -512,30 +512,6 @@ class _ShippingScreenState extends State<ShippingScreen> {
                           // onPressed: postTest(),
                           onPressed: () {
                             try {
-                              // Get.to(ChoosePaymentScreen());
-                              //                  posting
-                              //     .postBilling(
-                              //   fname: fname.text,
-                              //   lname: lname.text,
-                              //   company: company.text,
-                              //   city: city.text,
-                              //   country: country.text,
-                              //   state: state.text,
-                              //   phoneNo: phone.text,
-                              //   postCode: postCode.text,
-                              //   address1: address1.text,
-                              //   address2: address2.text,
-                              //   fnameS: fname.text,
-                              //   lnameS: lname.text,
-                              //   companyS: company.text,
-                              //   cityS: city.text,
-                              //   countryS: country.text,
-                              //   stateS: state.text,
-                              //   address1S: address1.text,
-                              //   address2S: address2.text,
-                              //   postCodeS: postCode.text,
-                              // )
-
                               posting
                                   .postBilling(
                                 fname: widget.bFname,
@@ -564,7 +540,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
                                 }
                               }));
                             } catch (e) {
-                              showError('Error please try again');
+                              // showError('Error please try again');
                               // print(e);
                             }
                             // Payment();

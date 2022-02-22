@@ -11,27 +11,6 @@ import 'models/cate_products.dart';
 // import 'package:get_storage/get_storage.dart';
 
 class ProductsController with BaseController {
-  void bookTrips(
-      String departFrom, String arriveTo, String transportCompany) async {
-    var request = {
-      'departure_from': departFrom,
-      'arrival_to': arriveTo,
-      'transport_company': transportCompany,
-    };
-    print(request);
-    showLoading('Posting data...');
-    var response = await BaseClient()
-        .post('/api/v1/trips/book-trip', request)
-        .catchError(handleError);
-    if (response == null) return;
-    hideLoading();
-    var result = jsonDecode(response);
-    // Get.to(TripSuccess());
-
-    print(result);
-    // else{GetStorage().write('response', response);}
-  }
-
 // Get
   Future getAllProducts() async {
     // showLoading('Fetching data...');

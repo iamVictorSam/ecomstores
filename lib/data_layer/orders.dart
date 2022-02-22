@@ -114,7 +114,7 @@ class OrdersControlller with BaseController {
     };
     showLoading('Posting data...');
     var response = await BaseClient()
-        .post('/api/v1/order/users/orders/347', request)
+        .post('/api/v1/order/users/orders/$id', request)
         .catchError(handleError);
     if (response == null) return;
     hideLoading();
@@ -135,7 +135,7 @@ class OrdersControlller with BaseController {
     print(id);
     var response = await BaseClient()
         .get(
-          '/api/v1/order/users/orders/347',
+          '/api/v1/order/users/orders/$id',
         )
         .catchError(handleError);
     if (response == null) return;

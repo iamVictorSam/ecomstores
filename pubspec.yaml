@@ -46,6 +46,7 @@ dependencies:
   flutter_html: ^2.2.1
   sliding_up_panel: ^2.0.0+1
   dio: ^4.0.4
+  animated_splash_screen: ^1.2.0
 
 dev_dependencies:
   flutter_test:

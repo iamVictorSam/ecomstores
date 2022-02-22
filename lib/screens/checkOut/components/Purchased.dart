@@ -121,7 +121,7 @@ class Purchased extends StatelessWidget {
                           horizontal: 20.0, vertical: 10),
                       child: DefaultButton(
                           press: () => Get.offAll(() => Orders()),
-                          text: 'Continue shopping'),
+                          text: 'View orders'),
                     )
                     // SizedBox(
                     //   width: SizeConfig.screenWidth * 0.6,

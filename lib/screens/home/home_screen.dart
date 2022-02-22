@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
     // var userId = userInfo.getUserInfo[0].id;
     // GetStorage().write('id', userId);
     return Scaffold(
-      body: Body(),
+      body: WillPopScope(onWillPop: () async => false, child: Body()),
       bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.home),
     );
   }

@@ -54,8 +54,8 @@ class RetrieveOrders {
     required this.dateModifiedGmt,
     required this.dateCompletedGmt,
     required this.datePaidGmt,
-    required this.stores,
-    required this.store,
+    // required this.stores,
+    // required this.store,
     required this.currencySymbol,
   });
 
@@ -100,8 +100,8 @@ class RetrieveOrders {
   DateTime dateModifiedGmt;
   DateTime? dateCompletedGmt;
   DateTime? datePaidGmt;
-  List<Store> stores;
-  Store store;
+  // List<Store> stores;
+  // Store store;
   String currencySymbol;
 
   factory RetrieveOrders.fromJson(Map<String, dynamic> json) => RetrieveOrders(
@@ -157,8 +157,8 @@ class RetrieveOrders {
         datePaidGmt: json["date_paid_gmt"] == null
             ? null
             : DateTime.parse(json["date_paid_gmt"]),
-        stores: List<Store>.from(json["stores"].map((x) => Store.fromJson(x))),
-        store: Store.fromJson(json["store"]),
+        // stores: List<Store>.from(json["stores"].map((x) => Store.fromJson(x))),
+        // store: Store.fromJson(json["store"]),
         currencySymbol: json["currency_symbol"],
       );
 
@@ -209,8 +209,8 @@ class RetrieveOrders {
             : dateCompletedGmt!.toIso8601String(),
         "date_paid_gmt":
             datePaidGmt == null ? null : datePaidGmt!.toIso8601String(),
-        "stores": List<dynamic>.from(stores.map((x) => x.toJson())),
-        "store": store.toJson(),
+        // "stores": List<dynamic>.from(stores.map((x) => x.toJson())),
+        // "store": store.toJson(),
         "currency_symbol": currencySymbol,
       };
 }

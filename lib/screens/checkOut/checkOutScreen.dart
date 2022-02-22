@@ -213,17 +213,8 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
           ),
           onPressed: () {
             try {
-              setState(() {
-                if (isloading == false) {
-                  isloading = !isloading;
-                }
-              });
-              // Get.back();
-              // Get.to(ChoosePaymentScreen());
               Navigator.pop(context);
-              print(company.text);
-              posting
-                  .postBilling(
+              posting.postBilling(
                 fname: fname.text,
                 lname: lname.text,
                 company: company.text,
@@ -243,19 +234,11 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
                 address1S: address1.text,
                 address2S: address2.text,
                 postCodeS: postCode.text,
-              )
-                  .whenComplete(() async {
-                // Get.to(() => CheckoutMethodSelectable());
+              );
 
-                setState(() {
-                  if (isloading == true) {
-                    isloading = false;
-                  }
-                });
-              });
               // Navigator.pop(context);
             } catch (e) {
-              showError(e.toString());
+              // showError(e.toString());
             }
           },
         ),
@@ -426,7 +409,7 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
                               TextFormField(
                                 controller: company,
                                 decoration: InputDecoration(
-                                  labelText: "Compan",
+                                  labelText: "Company",
                                   contentPadding: EdgeInsets.symmetric(
                                       horizontal: 8, vertical: 8),
                                   // hintText: "Re-enter your password",
@@ -540,21 +523,6 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
                               SizedBox(
                                 height: 20,
                               ),
-                              // TextFormField(
-                              //   keyboardType: TextInputType.emailAddress,
-                              //   controller: email,
-                              //   decoration: InputDecoration(
-                              //     labelText: "Email",
-                              //     // hintText: "Re-enter your password",
-                              //     floatingLabelBehavior:
-                              //         FloatingLabelBehavior.auto,
-                              //     contentPadding: EdgeInsets.symmetric(
-                              //         horizontal: 8, vertical: 8),
-                              //   ),
-                              // ),
-                              // SizedBox(
-                              //   height: 20,
-                              // ),
                               TextFormField(
                                 keyboardType: TextInputType.phone,
                                 controller: phone,
@@ -577,13 +545,10 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 30.0),
                         child: FloatingActionButton.extended(
-                          // onPressed: () => Get.to(() => CardDetailsScreen()),
-                          // onPressed: postTest(),
                           onPressed: () {
                             showError(
                                 'Do You want to use Your Billing Address as shipping Address?');
                           },
-
                           label: Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 40.0),
@@ -607,140 +572,4 @@ class _LocationFormScreenState extends State<LocationFormScreen> {
             ),
     );
   }
-
-//   void _processPayment() {
-//     try {
-//       String userEmail = box.read('email');
-//       PaystackPayManager(context: context)
-//         // Don't store your secret key on users device.
-//         // Make sure this is retrive from your server at run time
-//         ..setSecretKey("sk_test_67e5e200445c3fdd49dba76b09cb6fc9db6b065b")
-//         //accepts widget
-//         ..setCompanyAssetImage(Image(
-//           image: AssetImage("assets/logos/u&u LOGO_512.png"),
-//         ))
-//         ..setAmount(cartController.totalPrice.round() * 100)
-//         // ..setReference("your-unique-transaction-reference")
-//         ..setReference(DateTime.now().millisecondsSinceEpoch.toString())
-//         ..setCurrency("NGN")
-//         ..setEmail("$userEmail")
-//         ..setFirstName("$fname")
-//         ..setLastName("$lname")
-//         ..setMetadata(
-//           {
-//             "custom_fields": [
-//               {
-//                 "value": "snapTask",
-//                 "display_name": "Payment to",
-//                 "variable_name": "payment_to"
-//               }
-//             ]
-//           },
-//         )
-//         ..onSuccesful(_onPaymentSuccessful)
-//         ..onPending(_onPaymentPending)
-//         ..onFailed(_onPaymentFailed)
-//         ..onCancel(_onPaymentCancelled)
-//         ..initialize();
-//     } catch (error) {
-//       print("Payment Error ==> $error");
-//     }
-//   }
-
-//   void _onPaymentSuccessful(Transaction transaction) {
-//     if (transaction.message.contains('Approved')) {
-//       print('all done');
-//       print('this is working');
-//       // showDialog(context: context);
-
-//       String orderId = box.read('orderId');
-//       print(orderId);
-//       _showDialog();
-//       updateOrderRequest(
-//               // orderId: createOrderController.orderArray[0].data.orderId,
-//               // status: 'completed',
-//               orderId: orderId)
-//           .whenComplete(() {
-//         box.remove('orderId');
-//         print('all done');
-//         Get.offAll(() => Purchased());
-//         // setState(() {
-//         //   orderMade = !orderMade;
-//         // });
-//       });
-//     }
-//     print("Transaction was successful");
-//     print("Transaction Message ===> ${transaction.message}");
-//     print("Transaction Refrence ===> ${transaction.refrenceNumber}");
-//   }
-
-//   void _onPaymentPending(Transaction transaction) {
-//     print("Transaction is pendinng");
-//     print("Transaction Refrence ===> ${transaction.refrenceNumber}");
-//   }
-
-//   void _onPaymentFailed(Transaction transaction) {
-//     print("Transaction failed");
-//     print("Transaction Message ===> ${transaction.message}");
-//     _showErrorDialog();
-//   }
-
-//   void _onPaymentCancelled(Transaction transaction) {
-//     print("Transaction was cancelled");
-//   }
-
-// //   dynamic _checkPayment() {
-// //     try {
-// //       PaystackPayManager(context: context)
-// //         ..setSecretKey('sk_test_67e5e200445c3fdd49dba76b09cb6fc9db6b065b')
-// //         ..setCompanyAssetImage(
-// //             Image(image: AssetImage('assets/logos/u&u LOGO_512.png')))
-// //         ..setAmount(100000)
-// //         ..setReference(DateTime.now().millisecondsSinceEpoch.toString())
-// //         ..setCurrency('NGN')
-// //         ..setEmail('deelesivictorsam@gmail.com')
-// //         ..setFirstName('Sam')
-// //         ..setFirstName('Victor')
-// //         ..setMetadata({
-// //           'custom fields': [
-// //             {
-// //               'value': 'CodeWithSamFlash',
-// //               'display_name': 'Payment_to',
-// //               'variable_name': 'Payment_to'
-// //             }
-// //           ]
-// //         })
-// //         ..onSuccesful(onSuccessful)
-// //         ..onCancel(onCancel)
-// //         ..onFailed(onFailed)
-// //         ..onPending(onPending)
-// //         ..initialize();
-// //     } catch (e) {
-// //       print('Payment Error  ==> $e');
-// //     }
-// //   }
-
-// //   void onSuccessful(Transaction transaction) {
-// //     print('Payment Successful');
-// //     print(
-// //         'Transaction message ==> ${transaction.message}, Ref: ${transaction.refrenceNumber} state: ${transaction.state}');
-// //   }
-
-// //   void onCancel(Transaction transaction) {
-// //     print('Payment Cancelled');
-// //     print(
-// //         'Transaction message ==> ${transaction.message}, Ref: ${transaction.refrenceNumber} state: ${transaction.state}');
-// //   }
-
-// //   void onFailed(Transaction transaction) {
-// //     print('Payment Failed');
-// //     print(
-// //         'Transaction message ==> ${transaction.message}, state: ${transaction.state}');
-// //   }s
-
-// //   void onPending(Transaction transaction) {
-// //     print('Payment Pending');
-// //     print(
-// //         'Transaction message ==> ${transaction.message}, state: ${transaction.state}');
-// //   }
 }

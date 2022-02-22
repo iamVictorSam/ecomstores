@@ -27,11 +27,11 @@ class Body extends StatelessWidget {
           ProfileMenu(
             text: "Orders",
             icon: "assets/icons/User Icon.svg",
-            press: () => Get.to(() => Orders()),
+            press: () => Get.off(() => Orders()),
           ),
           ProfileMenu(
             text: "Profile",
-            icon: "assets/icons/Person.svg",
+            icon: "assets/icons/User Icon.svg",
             press: () => Get.to(Settings()),
           ),
           ProfileMenu(
@@ -44,8 +44,10 @@ class Body extends StatelessWidget {
             icon: "assets/icons/Log out.svg",
             press: () {
               cartController.cartItems.clear();
+              Get.deleteAll(force: true);
               // orders.getOrders.clear();
               // userController.getUserInfo.clear();
+
               GetStorage()
                   .remove('username')
                   .whenComplete(() => Get.offAll(SignInScreen()));
