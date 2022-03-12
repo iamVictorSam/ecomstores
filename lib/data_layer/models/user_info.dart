@@ -131,7 +131,7 @@ class Ing {
         "postcode": postcode,
         "country": country,
         "state": state,
-        "email": email ?? '',
-        "phone": phone ?? '',
+        "email": email,
+        "phone": phone,
       };
 }

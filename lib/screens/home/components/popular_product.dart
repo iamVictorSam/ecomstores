@@ -24,24 +24,50 @@ class PopularProducts extends StatelessWidget {
               title: "Popular Products", press: () => Get.to(SeeAllPopular())),
         ),
         SizedBox(height: getProportionateScreenWidth(20)),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Obx(() => Row(
-                children: [
-                  ...List.generate(
-                    reportsController.getAllProducts.length,
-                    (index) {
-                      return ProductCard(
-                          product: reportsController.getAllProducts[index]);
+        Obx(() => Container(
+            child: reportsController.isLoading.value
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                // : GridView.builder(
+                //     shrinkWrap: true,
+                //     // controller: productController.scrollController,
+                //     itemCount: reportsController.getAllProducts.length,
+                //     gridDelegate:
+                //         SliverGridDelegateWithFixedCrossAxisCount(
+                //       crossAxisCount: 2,
+                //       mainAxisSpacing: 12,
+                //       childAspectRatio: 0.7,
+                //     ),
+                //     itemBuilder: (BuildContext context, int index) {
+                //       return Container(
+                //         child: Padding(
+                //           padding: const EdgeInsets.only(right: 15.0),
+                //           child: ProductCard(
+                //             product:
+                //                 reportsController.getAllProducts[index],
+                //           ),
+                //         ),
+                //       );
+                //     },
+                //   ),
+                // )
 
-                      // return SizedBox
-                      //     .shrink(); // here by default width and height is 0
-                    },
-                  ),
-                  SizedBox(width: getProportionateScreenWidth(20)),
-                ],
-              )),
-        )
+                : Row(
+                    children: [
+                      ...List.generate(
+                        reportsController.getAllProducts.length,
+                        (index) {
+                          return ProductCard(
+                              product: reportsController.getAllProducts[index]);
+
+                          // return SizedBox
+                          //     .shrink(); // here by default width and height is 0
+                        },
+                      ),
+                      SizedBox(width: getProportionateScreenWidth(20)),
+                    ],
+                  ))),
       ],
     );
   }
