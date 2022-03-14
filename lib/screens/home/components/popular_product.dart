@@ -48,8 +48,8 @@ class PopularProducts extends StatelessWidget {
                 //                 reportsController.getAllProducts[index],
                 //           ),
                 //         ),
-                //       );
                 //     },
+                //       );
                 //   ),
                 // )
 
