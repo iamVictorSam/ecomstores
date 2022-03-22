@@ -20,7 +20,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   void initState() {
     super.initState();
 
-    if (box.read('username') != null) {
+    if (box.hasData('username') == true) {
       setState(() {
         checkAuth = true;
       });

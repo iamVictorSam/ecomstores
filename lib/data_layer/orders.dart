@@ -28,7 +28,7 @@ import 'package:get_storage/get_storage.dart';
 class OrdersControlller with BaseController {
   final cartController = Get.put(CartController());
   var id = GetStorage().read('userId');
-  String _email = 'iamvictorsam@gmail.com';
+  String _email = GetStorage().read('email');
   String _message = ' Purchase payment from email';
 
   // var publicKey = 'pk_test_4f1cebce3dba743b1414645a1f5ade8528d74138';

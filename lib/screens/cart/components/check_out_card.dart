@@ -19,7 +19,7 @@ class CheckoutCard extends StatelessWidget {
   final cartController = Get.put(CartController());
   final createOrder = OrdersControlller();
   final userInfo = Get.put(GetUserInfoController());
-  String _email = 'iamvictorsam@gmail.com';
+  String _email = GetStorage().read('email');
   int _amount = 0;
   String _message = '';
 

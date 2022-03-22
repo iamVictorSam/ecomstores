@@ -23,7 +23,9 @@ class SignUpController with BaseController {
       await BaseClient()
           .postSignUp('/api/v1/auth/users', request)
           .catchError(handleError);
-      Get.offAll(() => SignInScreen());
+      GetStorage()
+          .write(email, email)
+          .whenComplete(() => Get.offAll(() => SignInScreen()));
     } catch (e) {
       print(e);
     }
