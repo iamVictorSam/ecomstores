@@ -25,15 +25,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
         checkAuth = true;
       });
     }
-
-    // setState(() {
-    //   checkAuth = true;
-    // });
-
-    // this.checkAuthentification();
-    // setState(() {
-    //   checkAuth = false;
-    // });
   }
 
   @override
