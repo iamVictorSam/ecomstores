@@ -15,60 +15,70 @@ class PopularProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-          child: SectionTitle(
-              title: "Popular Products", press: () => Get.to(SeeAllPopular())),
-        ),
-        SizedBox(height: getProportionateScreenWidth(20)),
-        Obx(() => Container(
-            child: reportsController.isLoading.value
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                // : GridView.builder(
-                //     shrinkWrap: true,
-                //     // controller: productController.scrollController,
-                //     itemCount: reportsController.getAllProducts.length,
-                //     gridDelegate:
-                //         SliverGridDelegateWithFixedCrossAxisCount(
-                //       crossAxisCount: 2,
-                //       mainAxisSpacing: 12,
-                //       childAspectRatio: 0.7,
-                //     ),
-                //     itemBuilder: (BuildContext context, int index) {
-                //       return Container(
-                //         child: Padding(
-                //           padding: const EdgeInsets.only(right: 15.0),
-                //           child: ProductCard(
-                //             product:
-                //                 reportsController.getAllProducts[index],
-                //           ),
-                //         ),
-                //       );
-                //     },
-                //   ),
-                // )
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: getProportionateScreenWidth(20)),
+            child: SectionTitle(
+                title: "Popular Products",
+                press: () => Get.to(SeeAllPopular())),
+          ),
+          SizedBox(height: getProportionateScreenWidth(20)),
+          Obx(
+            () => Container(
+                width: double.infinity,
+                child: reportsController.isLoading.value
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : GridView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        // controller: productController.scrollController,
+                        itemCount: reportsController.getAllProducts.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 12,
+                          childAspectRatio: 0.8,
+                        ),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 15.0),
+                              child: ProductCard(
+                                product:
+                                    reportsController.getAllProducts[index],
+                              ),
+                            ),
+                          );
+                        })),
 
-                : Row(
-                    children: [
-                      ...List.generate(
-                        reportsController.getAllProducts.length,
-                        (index) {
-                          return ProductCard(
-                              product: reportsController.getAllProducts[index]);
+            // : Container(
+            //     width: double.infinity,
+            //     child: Row(
+            //       children: [
+            //         ...List.generate(
+            //           reportsController.getAllProducts.length,
+            //           (index) {
+            //             return ProductCard(
+            //                 product:
+            //                     reportsController.getAllProducts[index]);
 
-                          // return SizedBox
-                          //     .shrink(); // here by default width and height is 0
-                        },
-                      ),
-                      SizedBox(width: getProportionateScreenWidth(20)),
-                    ],
-                  ))),
-      ],
+            //             // return SizedBox
+            //             //     .shrink(); // here by default width and height is 0
+            //           },
+            //         ),
+            //         SizedBox(width: getProportionateScreenWidth(20)),
+            //       ],
+            //     ),
+            //   ),
+            // ),
+          ),
+        ],
+      ),
     );
   }
 }

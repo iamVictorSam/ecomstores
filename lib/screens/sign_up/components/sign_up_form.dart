@@ -66,6 +66,7 @@ class _SignUpFormState extends State<SignUpForm> {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 controller.signup(fname, lname, email, password, username);
+
                 // print(fname);
                 // print(lname);
                 // print(username);

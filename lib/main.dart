@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Ace Express',
       theme: theme(),
       // home: SplashScreen(),
       // We use routeName so that we dont need to remember the name
