@@ -2,7 +2,7 @@
     package="com.ace.express.dev">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="Ace-Express"
+        android:label="Acexpress"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         android:name="android.support.multidex.MultiDexApplication">

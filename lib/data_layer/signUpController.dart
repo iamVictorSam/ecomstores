@@ -20,16 +20,17 @@ class SignUpController with BaseController {
     showLoading('Loading');
     print(request);
     try {
-      await BaseClient()
+      var response = await BaseClient()
           .postSignUp('/api/v1/auth/users', request)
           .catchError(handleError);
+      hideLoading();
+      if (response == null) return;
       GetStorage()
-          .write(email, email)
+          .write('email', email)
           .whenComplete(() => Get.offAll(() => SignInScreen()));
     } catch (e) {
       print(e);
     }
-    // hideLoading();
     // else{GetStorage().write('token', token);}
   }
 }

@@ -48,11 +48,13 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        multiDexEnabled true
     }
 
     signingConfigs {
         release {
-            storeFile file("C:\\ace_express.keystore")
+            storeFile file("ace_express.keystore")
             storePassword "remember55"
             keyAlias "ace_express_main"
             keyPassword "remember55"

@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:ecomstore/constants.dart';
 import 'package:ecomstore/controllers/userInforController.dart';
 import 'package:ecomstore/data_layer/models/user_info.dart';
+import 'package:ecomstore/screens/settings/wallet_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,10 +42,10 @@ class Settings extends StatelessWidget {
                       SizedBox(
                         height: 20,
                       ),
-
-                      //   ],
-                      // )),
-
+                      WalletCard(),
+                      SizedBox(
+                        height: 30,
+                      ),
                       biilingInfo(user: userInfo.getUserInfo[0]),
                     ]),
                   ),
