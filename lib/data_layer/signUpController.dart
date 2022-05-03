@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:ecomstore/helper/baseController.dart';
 import 'package:ecomstore/screens/home/home_screen.dart';
 import 'package:ecomstore/screens/sign_in/sign_in_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ecomstore/services/base_client.dart';
 import 'package:get_storage/get_storage.dart';
@@ -25,9 +26,16 @@ class SignUpController with BaseController {
           .catchError(handleError);
       hideLoading();
       if (response == null) return;
-      GetStorage()
-          .write('email', email)
-          .whenComplete(() => Get.offAll(() => SignInScreen()));
+      const GetSnackBar(
+        title: 'Account Created',
+        message: 'Please Sign in',
+        backgroundColor: Colors.green,
+      );
+      Future.delayed(3000.milliseconds, () {
+        GetStorage()
+            .write('email', email)
+            .whenComplete(() => Get.offAll(() => SignInScreen()));
+      });
     } catch (e) {
       print(e);
     }
