@@ -1,3 +1,4 @@
+import 'package:ecomstore/screens/sign_in/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ecomstore/components/default_button.dart';
 import 'package:ecomstore/screens/home/home_screen.dart';
@@ -15,24 +16,32 @@ class Body extends StatelessWidget {
         ),
         SizedBox(height: SizeConfig.screenHeight * 0.08),
         Text(
-          "Login Success",
+          "Registration Success",
           style: TextStyle(
             fontSize: getProportionateScreenWidth(30),
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
         ),
-        Spacer(),
+        // Text(
+        //   "Registration Success",
+        //   style: TextStyle(
+        //     fontSize: getProportionateScreenWidth(30),
+        //     fontWeight: FontWeight.bold,
+        //     color: Colors.black,
+        //   ),
+        // ),
+        const Spacer(),
         SizedBox(
           width: SizeConfig.screenWidth * 0.6,
           child: DefaultButton(
-            text: "Back to home",
+            text: "Continue to Sign in",
             press: () {
-              Navigator.pushNamed(context, HomeScreen.routeName);
+              Navigator.pushNamed(context, SignInScreen.routeName);
             },
           ),
         ),
-        Spacer(),
+        const Spacer(),
       ],
     );
   }
