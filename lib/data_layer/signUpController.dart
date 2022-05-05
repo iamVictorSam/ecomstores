@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ecomstore/helper/baseController.dart';
 import 'package:ecomstore/screens/home/home_screen.dart';
+import 'package:ecomstore/screens/login_success/login_success_screen.dart';
 import 'package:ecomstore/screens/sign_in/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,7 +35,7 @@ class SignUpController with BaseController {
       Future.delayed(3000.milliseconds, () {
         GetStorage()
             .write('email', email)
-            .whenComplete(() => Get.offAll(() => SignInScreen()));
+            .whenComplete(() => Get.offAll(() => LoginSuccessScreen()));
       });
     } catch (e) {
       print(e);
