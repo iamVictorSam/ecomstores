@@ -56,6 +56,7 @@ class _SignUpFormState extends State<SignUpForm> {
           buildEmailFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildPasswordFormField(),
+          // update
           SizedBox(height: getProportionateScreenHeight(30)),
           buildConformPassFormField(),
           FormError(errors: errors),
