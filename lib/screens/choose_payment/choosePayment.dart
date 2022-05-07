@@ -85,6 +85,14 @@ class ChoosePaymentScreen extends StatelessWidget {
                   print(_message);
                 },
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              DefaultButton(
+                text: 'Pay from Wallet',
+                bgColor: Colors.teal,
+                press: () {},
+              ),
             ],
           ),
         ),
