@@ -2,18 +2,21 @@ import 'package:ecomstore/components/default_button.dart';
 import 'package:ecomstore/constants.dart';
 import 'package:ecomstore/controllers/cartController.dart';
 import 'package:ecomstore/data_layer/orders.dart';
+import 'package:ecomstore/data_layer/wallet.dart';
+import 'package:ecomstore/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:flutter_paystack_client/flutter_paystack_client.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+// ignore: must_be_immutable
 class ChoosePaymentScreen extends StatelessWidget {
   ChoosePaymentScreen({Key? key}) : super(key: key);
   final createOrder = OrdersControlller();
   final cartController = Get.put(CartController());
 
-  String _email = GetStorage().read('email');
+  final String _email = GetStorage().read('email');
   String _message = ' Purchase payment from email';
 
   var publicKey = '[YOUR_PAYSTACK_PUBLIC_KEY]';
@@ -24,11 +27,16 @@ class ChoosePaymentScreen extends StatelessWidget {
     plugin.initialize(publicKey: publicKey);
   }
 
+  final controller = Wallet();
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        return Navigator.canPop(context);
+        // Do something here
+        Get.off(HomeScreen());
+        print("After clicking the Android Back Button");
+        return false;
       },
       child: Scaffold(
         appBar: AppBar(
@@ -91,7 +99,10 @@ class ChoosePaymentScreen extends StatelessWidget {
               DefaultButton(
                 text: 'Pay from Wallet',
                 bgColor: Colors.teal,
-                press: () {},
+                press: () {
+                  controller.debitWallet(
+                      cartController.totalPrice.toInt(), context);
+                },
               ),
             ],
           ),

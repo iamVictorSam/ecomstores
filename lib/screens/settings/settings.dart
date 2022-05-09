@@ -4,8 +4,10 @@
 import 'dart:math';
 
 import 'package:ecomstore/constants.dart';
+import 'package:ecomstore/controllers/balanceController.dart';
 import 'package:ecomstore/controllers/userInforController.dart';
 import 'package:ecomstore/data_layer/models/user_info.dart';
+import 'package:ecomstore/screens/home/home_screen.dart';
 import 'package:ecomstore/screens/settings/wallet_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,7 @@ class Settings extends StatelessWidget {
   String? gender;
 
   final userInfo = Get.put(GetUserInfoController());
+  final balance = Get.put(GetBalance());
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +45,16 @@ class Settings extends StatelessWidget {
                       SizedBox(
                         height: 20,
                       ),
-                      WalletCard(),
+                      ...List.generate(
+                        1,
+                        (index) => balance.isLoading.value
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                  color: kPrimaryColor,
+                                ),
+                              )
+                            : WalletCard(balance.balance.value),
+                      ),
                       SizedBox(
                         height: 30,
                       ),
