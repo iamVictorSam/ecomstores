@@ -29,7 +29,6 @@ class AllProducts {
     required this.productImages,
     required this.priceHtml,
     required this.stockStatus,
-    required this.productOwner,
   });
 
   int productId;
@@ -49,7 +48,6 @@ class AllProducts {
   List<ProductImage> productImages;
   String priceHtml;
   StockStatus stockStatus;
-  ProductOwner productOwner;
 
   factory AllProducts.fromJson(Map<String, dynamic> json) => AllProducts(
         productId: json["product_id"],
@@ -71,7 +69,6 @@ class AllProducts {
             json["product_images"].map((x) => ProductImage.fromJson(x))),
         priceHtml: json["price_html"],
         stockStatus: stockStatusValues.map[json["stock_status"]]!,
-        productOwner: ProductOwner.fromJson(json["product_owner"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -93,7 +90,6 @@ class AllProducts {
             List<dynamic>.from(productImages.map((x) => x.toJson())),
         "price_html": priceHtml,
         "stock_status": stockStatusValues.reverse[stockStatus],
-        "product_owner": productOwner.toJson(),
       };
 }
 

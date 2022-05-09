@@ -32,7 +32,7 @@ class Body extends StatelessWidget {
           ProfileMenu(
             text: "Profile",
             icon: "assets/icons/User Icon.svg",
-            press: () => Get.to(Settings()),
+            press: () => Get.to(() => Settings()),
           ),
           ProfileMenu(
             text: "Help Center",

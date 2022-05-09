@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:ecomstore/services/app_exceptions.dart';
 
 class BaseClient {
-  static const int TIME_OUT_DURATION = 50;
+  static const int TIME_OUT_DURATION = 25;
   static const String baseUrl = 'https://wp-rest-service.herokuapp.com';
 
   // String _token = GetStorage().read('token');
@@ -18,6 +18,29 @@ class BaseClient {
       'Content-type': 'application/json',
       'Accept': 'application/json',
       // "Authorization": "Bearer $_token",
+    };
+    var url = Uri.parse(baseUrl + api);
+    try {
+      var response = await http.get(url, headers: requestHeaders).timeout(
+            Duration(seconds: TIME_OUT_DURATION),
+          );
+      print(response.body);
+      print(response.statusCode);
+      return _processResponse(response);
+    } on TimeoutException {
+      ApiNotRespondingException('Session Timeout', url.toString());
+    } on SocketException {
+      throw FetchDataException('No Internet Connection', url.toString());
+    }
+  }
+
+  Future<dynamic> getWithBearer(String api) async {
+    var _token = GetStorage().read('token');
+    // ignore: non_constant_identifier_names
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      "Authorization": "Bearer $_token",
     };
     var url = Uri.parse(baseUrl + api);
     try {
