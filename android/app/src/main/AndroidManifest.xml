@@ -5,6 +5,7 @@
         android:label="Acexpress"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        android:usesCleartextTraffic="true"
         android:name="android.support.multidex.MultiDexApplication">
         <activity
             android:name=".MainActivity"

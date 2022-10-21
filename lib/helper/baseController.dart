@@ -68,10 +68,10 @@ class BaseController {
   // manifest not found, please try again!
 
   showLoading([String? message]) {
-    DialogHelper?.showLoading(message!);
+    DialogHelper.showLoading(message!);
   }
 
   hideLoading() {
-    DialogHelper?.hideDialog();
+    DialogHelper.hideDialog();
   }
 }
